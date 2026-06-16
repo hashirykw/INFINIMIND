@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InfiniMind Academy — AI Literacy for Grades 1–5</title>
+<meta name="description" content="InfiniMind Academy — small-group, parent-visible AI literacy classes for children in grades 1 to 5. Book a free trial class in Karachi.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0c'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' fill='%23d9dbe1' font-family='Georgia'%3E∞%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================= RESET ============================= */
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
+body{min-height:100vh;}
+img,canvas,svg{display:block;max-width:100%;}
+ul{list-style:none;margin:0;padding:0;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+h1,h2,h3,p{margin:0;}
+
+/* ============================= TOKENS ============================= */
+:root{
+  --bg:#0b0b0d;
+  --bg-elevated:#15151a;
+  --bg-soft:#101013;
+  --ink:#f4f4f7;
+  --ink-muted:#9b9ba6;
+  --line:rgba(255,255,255,.10);
+  --silver-1:#eef0f4;
+  --silver-2:#9a9aa6;
+  --gold:#cda968;
+  --accent:#cda968;
+  --accent-ink:#1a1408;
+  --grad-text:linear-gradient(135deg,#ffffff 0%,#cfd2da 35%,#8d8f99 55%,#f5f6f8 75%,#9a9ca6 100%);
+  --nav-bg:rgba(11,11,13,.72);
+  --shadow-card:0 24px 60px -24px rgba(0,0,0,.65);
+  --radius-lg:24px;
+  --radius-md:16px;
+  --container:1180px;
+  --font-display:'Sora',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html[data-theme="light"]{
+  --bg:#f3f1ec;
+  --bg-elevated:#ffffff;
+  --bg-soft:#ece9e1;
+  --ink:#16161a;
+  --ink-muted:#5c5c66;
+  --line:rgba(0,0,0,.09);
+  --silver-1:#d7d9de;
+  --silver-2:#6c6c76;
+  --gold:#9c7733;
+  --accent:#9c7733;
+  --accent-ink:#fffaf0;
+  --grad-text:linear-gradient(135deg,#1c1c22 0%,#55565f 45%,#1c1c22 100%);
+  --nav-bg:rgba(243,241,236,.78);
+  --shadow-card:0 24px 50px -28px rgba(0,0,0,.25);
+}
+body.playroom{
+  --font-display:'Baloo 2',cursive;
+  --font-body:'Nunito',sans-serif;
+}
+html[data-theme="dark"] body.playroom{
+  --bg:linear-gradient(120deg,#6ec6ff 0%,#ffd93d 45%,#ff8fab 100%);
+  --bg-elevated:#ffffff;
+  --bg-soft:#fff9ec;
+  --ink:#201f3a;
+  --ink-muted:#5b5a78;
+  --line:rgba(32,31,58,.12);
+  --accent:#ff6b6b;
+  --accent-ink:#ffffff;
+  --grad-text:linear-gradient(120deg,#ff6b6b,#a78bfa,#6ec6ff);
+  --nav-bg:rgba(255,255,255,.78);
+  --shadow-card:0 24px 50px -24px rgba(32,31,58,.25);
+}
+html[data-theme="light"] body.playroom{
+  --bg:linear-gradient(120deg,#241f45 0%,#4b2e7a 45%,#7a3b6e 100%);
+  --bg-elevated:#2a2350;
+  --bg-soft:#1f1a3c;
+  --ink:#f4f0ff;
+  --ink-muted:#bdb3e6;
+  --line:rgba(255,255,255,.14);
+  --accent:#a78bfa;
+  --accent-ink:#1b1430;
+  --grad-text:linear-gradient(120deg,#a78bfa,#6ec6ff,#ff8fab);
+  --nav-bg:rgba(42,35,80,.78);
+  --shadow-card:0 24px 50px -22px rgba(0,0,0,.55);
+}
+
+/* ============================= BASE ============================= */
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  transition:background .4s var(--ease),color .4s var(--ease);
+}
+body.playroom{background-size:300% 300%;animation:skyShift 22s ease infinite;}
+@keyframes skyShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;}
+.container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+.grad-text{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px;}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:600;font-size:.95rem;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 14px 30px -12px rgba(0,0,0,.45);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 36px -12px rgba(0,0,0,.55);}
+.btn:active{transform:translateY(1px) scale(.97);}
+.btn-lg{padding:16px 30px;font-size:1.02rem;}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);}
+.btn-ghost:hover{background:var(--bg-elevated);}
+.btn-outline{border:1px solid var(--line);color:var(--ink);width:100%;}
+.btn-outline:hover{background:var(--bg-soft);}
+
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+[data-reveal].revealed{opacity:1;transform:none;}
+
+/* currency / security texture — used behind the logo mark */
+.security-texture{position:relative;overflow:hidden;}
+.security-texture::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.55) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.45) 0 1px, transparent 1px 7px);
+  opacity:.06;
+}
+
+/* ============================= BRAND MARK ============================= */
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mark{
+  position:relative;width:42px;height:42px;border-radius:12px;background:#0a0a0c;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 8px 18px -8px rgba(0,0,0,.6);
+}
+.brand-mark::after{
+  content:"";position:absolute;top:-40%;left:-25%;width:150%;height:65%;
+  background:linear-gradient(120deg,rgba(255,255,255,.4),rgba(255,255,255,0) 60%);
+  transform:rotate(-10deg);filter:blur(1px);
+}
+.brand-mark .glyph{
+  position:relative;z-index:1;font-family:'Sora',sans-serif;font-weight:800;font-size:21px;
+  background:linear-gradient(135deg,#ffffff,#cfd2da,#8d8f99,#f5f6f8);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+body.playroom .brand-mark{animation:bob 2.4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-3px) rotate(-4deg);}}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:1.12rem;}
+
+/* ============================= NAV ============================= */
+.nav{position:sticky;top:0;z-index:60;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 24px;max-width:var(--container);margin:0 auto;}
+.nav-links{display:flex;gap:26px;font-size:.92rem;font-weight:500;}
+.nav-links a{opacity:.85;transition:opacity .2s;}
+.nav-links a:hover{opacity:1;}
+.nav-actions{display:flex;align-items:center;gap:14px;}
+.icon-btn{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);font-size:1.05rem;}
+.icon-btn:hover{background:var(--bg-elevated);}
+
+.world-toggle{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;border:1px solid var(--line);font-size:.82rem;font-weight:600;}
+.world-toggle-track{position:relative;width:42px;height:24px;border-radius:999px;background:var(--bg-soft);border:1px solid var(--line);}
+.world-toggle-thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--accent);transition:transform .3s var(--ease);}
+.world-toggle[aria-pressed="true"] .world-toggle-thumb{transform:translateX(18px);}
+.nav-burger{display:none;font-size:1.4rem;background:none;border:none;}
+
+@media (max-width:880px){
+  .nav-links{display:none;}
+  .nav-actions .btn-primary{display:none;}
+  .nav-burger{display:block;}
+  .nav.nav-open .nav-links{
+    display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+    background:var(--nav-bg);backdrop-filter:blur(14px);padding:18px 24px;gap:14px;border-bottom:1px solid var(--line);
+  }
+}
+
+/* ============================= HERO ============================= */
+.hero{position:relative;padding:90px 0 70px;overflow:hidden;}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;max-width:var(--container);margin:0 auto;padding:0 24px;}
+.eyebrow{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+.hero h1{font-size:clamp(2.1rem,4.4vw,3.4rem);font-weight:800;line-height:1.08;margin-bottom:20px;}
+.lede{font-size:1.08rem;color:var(--ink-muted);max-width:520px;margin-bottom:28px;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
+.trust-row{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;color:var(--ink-muted);}
+
+.hero-visual{position:relative;aspect-ratio:1/1;max-height:440px;}
+.hero-orb-badge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.hero-orb-badge::after{
+  content:"";position:absolute;width:60%;height:60%;border-radius:50%;
+  background:radial-gradient(circle, rgba(205,169,104,.18), transparent 70%);
+  filter:blur(10px);
+}
+.infinity-glyph{
+  position:relative;font-family:var(--font-display);font-weight:800;font-size:clamp(80px,20vw,210px);line-height:1;
+  background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 22px 40px rgba(0,0,0,.5));
+}
+#infinityCanvas{position:absolute;inset:0;width:100%;height:100%;}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-soft);overflow:hidden;padding:14px 0;}
+.marquee-track{display:flex;width:max-content;animation:scrollLeft 26s linear infinite;}
+.marquee-track span{padding:0 28px;font-size:.85rem;font-weight:600;color:var(--ink-muted);white-space:nowrap;}
+@keyframes scrollLeft{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ============================= SECTION GENERICS ============================= */
+section{padding:90px 0;}
+.section-sub{color:var(--ink-muted);margin-top:10px;font-size:1.02rem;}
+h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;}
+
+/* value */
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:42px;}
+.value-card{background:var(--bg-elevated);border:1px solid var(--line);border-radius:var(--radius-lg);padding:30px;box-shadow:var(--shadow-card);}
+.value-card h3{font-size:1.12rem;margin-bottom:10px;}
+.value-card p{color:var(--ink-muted);font-size:.96rem;}
+
+/* programs */
+.programs{background:var(--bg-soft);}
+.programs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:42px;}
+.program-card{background:var(--bg-elevated);border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-card);position:relative;}
+.program-tag{display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.program-card h3{font-size:1.3rem;margin-bottom:6px;}
+.program-grade{color:var(--ink-muted);font-size:.88rem;margin-bottom:14px;}
+.program-card p{color:var(--ink-muted);}
+
+/* how it works */
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:42px;}
+.how-step{padding:26px 22px;border-radius:var(--radius-md);border:1px solid var(--line);background:var(--bg-elevated);}
+.how-step .num{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:var(--accent);opacity:.8;display:block;margin-bottom:10px;}
+.how-step h3{font-size:1.02rem;margin-bottom:8px;}
+.how-step p{font-size:.9rem;color:var(--ink-muted);}
+
+/* safety */
+.safety{background:var(--bg-soft);}
+.safety-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:46px;align-items:center;}
+.safety-copy p{color:var(--ink-muted);margin:16px 0 22px;max-width:520px;}
+.safety-copy ul{display:flex;flex-direction:column;gap:12px;}
+.safety-copy li{display:flex;gap:10px;font-size:.96rem;}
+.safety-copy li::before{content:"✓";color:var(--accent);font-weight:800;}
+.safety-card{background:var(--bg-elevated);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:40px;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;position:relative;}
+
+/* shared 3D slab depth — a thin top highlight + inner shading on top of the ambient drop shadow */
+.value-card,.program-card,.how-step,.safety-card,.plan-card{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -18px 26px -20px rgba(0,0,0,.35),
+    var(--shadow-card);
+}
+.safety-card .shield{font-size:5rem;}
+
+/* ============================= MEMBERSHIP WHEEL ============================= */
+.membership{text-align:center;}
+.wheel-wrap{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:50px;}
+.wheel-arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--bg-elevated);font-size:1.3rem;flex-shrink:0;}
+.wheel-arrow:hover{background:var(--bg-soft);}
+.wheel-stage{perspective:1600px;width:320px;height:460px;display:flex;align-items:center;justify-content:center;}
+.wheel{position:relative;width:300px;height:420px;transform-style:preserve-3d;transition:transform .7s var(--ease);}
+.plan-card{position:absolute;inset:0;width:300px;border-radius:var(--radius-lg);background:var(--bg-elevated);border:1px solid var(--line);box-shadow:var(--shadow-card);padding:30px 26px;text-align:left;backface-visibility:visible;transition:opacity .5s var(--ease),filter .5s var(--ease);opacity:.45;filter:blur(.5px) brightness(.75);cursor:pointer;}
+.plan-card.is-active{opacity:1;filter:none;cursor:default;}
+.plan-card:nth-child(1){transform:rotateY(0deg) translateZ(380px);}
+.plan-card:nth-child(2){transform:rotateY(120deg) translateZ(380px);}
+.plan-card:nth-child(3){transform:rotateY(240deg) translateZ(380px);}
+.plan-ribbon{position:absolute;top:18px;right:-8px;background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:6px 0 0 6px;}
+.plan-name{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
+.plan-price{margin-bottom:18px;}
+.plan-price .amount{font-size:1.6rem;font-weight:800;}
+.plan-price .period{color:var(--ink-muted);font-size:.85rem;}
+.plan-features{display:flex;flex-direction:column;gap:9px;margin-bottom:22px;}
+.plan-features li{font-size:.9rem;color:var(--ink-muted);display:flex;gap:8px;}
+.plan-features li::before{content:"•";color:var(--accent);}
+.wheel-dots{display:flex;justify-content:center;gap:10px;margin-top:26px;}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line);}
+.dot.active{background:var(--accent);width:22px;border-radius:6px;transition:all .3s var(--ease);}
+.plan-note{margin-top:22px;color:var(--ink-muted);font-size:.88rem;}
+
+@media (max-width:720px){
+  .wheel-stage{width:260px;height:420px;}
+  .wheel{width:240px;}
+  .plan-card{width:240px;}
+  .plan-card:nth-child(1){transform:rotateY(0deg) translateZ(260px);}
+  .plan-card:nth-child(2){transform:rotateY(120deg) translateZ(260px);}
+  .plan-card:nth-child(3){transform:rotateY(240deg) translateZ(260px);}
+}
+
+/* ============================= FAQ ============================= */
+.accordion{margin-top:36px;border-top:1px solid var(--line);}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 4px;text-align:left;font-size:1rem;font-weight:600;}
+.faq-q .plus{transition:transform .3s var(--ease);font-size:1.3rem;color:var(--accent);}
+.faq-item.open .faq-q .plus{transform:rotate(45deg);}
+.faq-a{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .35s var(--ease);}
+.faq-item.open .faq-a{grid-template-rows:1fr;}
+.faq-a-inner{min-height:0;padding:0 4px 20px;color:var(--ink-muted);font-size:.95rem;max-width:680px;}
+
+/* cta band */
+.cta-band{background:var(--bg-elevated);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+#ctaCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.6;pointer-events:none;}
+.cta-band-inner{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;}
+.cta-band-inner h2{max-width:600px;}
+
+/* ============================= FOOTER ============================= */
+.footer{padding:70px 0 0;background:var(--bg-soft);}
+body.playroom .footer{background:var(--bg-elevated);}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1.2fr;gap:40px;padding-bottom:50px;border-bottom:1px solid var(--line);}
+.footer-brand p{color:var(--ink-muted);margin:14px 0 18px;max-width:320px;font-size:.92rem;}
+.social-row{display:flex;gap:12px;}
+.social-row a{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+.social-row a:hover{background:var(--bg-elevated);}
+.footer-col h4{font-size:.95rem;margin-bottom:16px;}
+.footer-col ul{display:flex;flex-direction:column;gap:10px;font-size:.92rem;color:var(--ink-muted);}
+.footer-col address{font-style:normal;color:var(--ink-muted);font-size:.92rem;margin-bottom:14px;line-height:1.6;}
+.map-frame{border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;height:160px;margin-top:14px;}
+.map-frame iframe{width:100%;height:100%;border:0;filter:grayscale(.2);}
+.footer-bottom{padding:22px 0;text-align:center;font-size:.82rem;color:var(--ink-muted);}
+
+.whatsapp-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);z-index:70;}
+
+/* world-flash transition */
+.world-flash{position:fixed;inset:0;pointer-events:none;z-index:200;opacity:0;background:radial-gradient(circle at var(--fx,50% 50%), #ffffff, transparent 60%);}
+.world-flash.active{animation:flashPulse .6s ease;}
+@keyframes flashPulse{0%{opacity:0;}30%{opacity:.6;}100%{opacity:0;}}
+
+/* ============================= RESPONSIVE ============================= */
+@media (max-width:980px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-visual{max-height:320px;order:-1;}
+  .value-grid,.programs-grid{grid-template-columns:1fr;}
+  .how-steps{grid-template-columns:repeat(2,1fr);}
+  .safety-inner{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+}
+@media (max-width:560px){
+  .how-steps{grid-template-columns:1fr;}
+  .hero-ctas{flex-direction:column;align-items:stretch;}
+  .trust-row{gap:10px 16px;}
+}
+@media (max-width:480px){
+  .container{padding:0 16px;}
+  .hero-inner{padding:0 16px;}
+  .nav-inner{padding:12px 16px;gap:8px;}
+  .brand-name{font-size:.98rem;}
+  .nav-actions{gap:8px;}
+  .world-toggle{padding:5px 8px 5px 5px;}
+  .world-toggle-label{display:none;}
+  .hero-visual{max-height:230px;}
+}
+@media (max-width:420px){
+  .wheel-wrap{gap:8px;}
+  .wheel-arrow{width:36px;height:36px;font-size:1.1rem;flex-shrink:0;}
+  .wheel-stage{width:220px;height:400px;}
+  .wheel{width:200px;}
+  .plan-card{width:200px;padding:24px 18px;}
+  .plan-card:nth-child(1){transform:rotateY(0deg) translateZ(220px);}
+  .plan-card:nth-child(2){transform:rotateY(120deg) translateZ(220px);}
+  .plan-card:nth-child(3){transform:rotateY(240deg) translateZ(220px);}
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  body.playroom{animation:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="worldFlash" class="world-flash" aria-hidden="true"></div>
+
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark security-texture"><span class="glyph">∞</span></span>
+      <span class="brand-name">InfiniMind</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#programs">Programs</a>
+      <a href="#how">How It Works</a>
+      <a href="#safety">Safety</a>
+      <a href="#membership">Membership</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle light and dark theme">🌙</button>
+      <button id="worldToggle" class="world-toggle" role="switch" aria-pressed="false" aria-label="Switch between Boardroom and Playroom view">
+        <span class="world-toggle-track"><span class="world-toggle-thumb"></span></span>
+        <span class="world-toggle-label">Boardroom</span>
+      </button>
+      <a href="#membership" class="btn btn-primary">Book Free Trial</a>
+    </div>
+    <button id="navBurger" class="nav-burger" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow" data-kid="Hey Explorer! 👋">For Parents of Grades 1–5</p>
+        <h1 data-kid="Let's go meet your AI friends! 🚀">Give your child an edge in the age of AI — <span class="grad-text">without the overwhelm.</span></h1>
+        <p class="lede" data-kid="Fun games, friendly robots, and cool AI tricks — made just for kids like you!">InfiniMind Academy teaches children in grades 1–5 to understand and safely explore AI — through fun, supervised, small-group sessions built for parents who want their kids ready for tomorrow.</p>
+        <div class="hero-ctas">
+          <a href="#membership" class="btn btn-primary btn-lg" data-kid="Let's play and learn!">Book a Free Trial Class</a>
+          <a href="#how" class="btn btn-ghost" data-kid="Show me how! 🎈">See How It Works</a>
+        </div>
+        <ul class="trust-row" aria-label="Trust highlights">
+          <li>🔒 Child-safe sessions</li>
+          <li>👩‍🏫 Vetted mentors</li>
+          <li>👀 Parent visibility</li>
+          <li>💳 Cancel anytime</li>
+        </ul>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-orb-badge" aria-hidden="true"><span class="infinity-glyph">∞</span></div>
+        <canvas id="infinityCanvas" aria-hidden="true"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Critical Thinking ✦ AI Safety ✦ Creative Projects ✦ Confidence for Tomorrow ✦ Small Groups ✦ Parent Visibility ✦</span>
+      <span>Critical Thinking ✦ AI Safety ✦ Creative Projects ✦ Confidence for Tomorrow ✦ Small Groups ✦ Parent Visibility ✦</span>
+    </div>
+  </div>
+
+  <section id="why">
+    <div class="container">
+      <h2 data-reveal data-kid="Why learning about AI is fun!">Why AI literacy, why now</h2>
+      <div class="value-grid">
+        <div class="value-card" data-reveal>
+          <h3>Already in their world</h3>
+          <p>Voice assistants, recommendation feeds, AI art generators — children use AI daily, often without knowing it. Guided exposure beats unguided exposure.</p>
+        </div>
+        <div class="value-card" data-reveal>
+          <h3>Curiosity, not coding</h3>
+          <p>No keyboard-heavy syllabus, no pressure. Age-appropriate concepts, simple analogies, and a lot of asking "how does that work?"</p>
+        </div>
+        <div class="value-card" data-reveal>
+          <h3>Confidence, not fear</h3>
+          <p>Children who understand how a tool works tend to trust it appropriately — neither blindly nor anxiously. That's the habit we're building.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="programs" id="programs">
+    <div class="container">
+      <h2 data-reveal data-kid="Pick your adventure!">Two tracks, built by age</h2>
+      <p class="section-sub" data-reveal>Different ages learn differently — so the room, pace, and projects change with them.</p>
+      <div class="programs-grid">
+        <div class="program-card" data-reveal>
+          <span class="program-tag">Little Explorers</span>
+          <h3>Story-led discovery</h3>
+          <p class="program-grade">Grades 1–2</p>
+          <p>How does a voice assistant "hear" you? Spot-the-robot games, and a first AI art project — mostly play, very little screen-typing.</p>
+        </div>
+        <div class="program-card" data-reveal>
+          <span class="program-tag">Young Innovators</span>
+          <h3>Guided hands-on practice</h3>
+          <p class="program-grade">Grades 3–5</p>
+          <p>Guided chatbot conversations, fact-checking AI answers together, AI-assisted storytelling, and an introduction to how AI makes decisions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="container">
+      <h2 data-reveal data-kid="How a season works!">How a term at InfiniMind works</h2>
+      <div class="how-steps">
+        <div class="how-step" data-reveal>
+          <span class="num">01</span>
+          <h3>Book a free trial class</h3>
+          <p>Meet a mentor and try one live session — no card required.</p>
+        </div>
+        <div class="how-step" data-reveal>
+          <span class="num">02</span>
+          <h3>Join a small group</h3>
+          <p>Max 6–8 children per group, matched by age and grade.</p>
+        </div>
+        <div class="how-step" data-reveal>
+          <span class="num">03</span>
+          <h3>Weekly live sessions</h3>
+          <p>Short, 30-minute sessions that respect a child's attention span.</p>
+        </div>
+        <div class="how-step" data-reveal>
+          <span class="num">04</span>
+          <h3>Monthly showcase</h3>
+          <p>Children present one project to parents — proof of progress, not just a certificate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="safety" id="safety">
+    <div class="container safety-inner">
+      <div class="safety-copy" data-reveal>
+        <h2 data-kid="Grown-ups, you're always welcome!">Built for parents who are (rightly) careful</h2>
+        <p>We built InfiniMind for the parent who isn't anti-technology — just unconvinced that "AI institute" and "eight-year-old" belong in the same sentence without real safeguards. So we made the safeguards the product, not an afterthought.</p>
+        <ul>
+          <li>Small live groups — never unsupervised one-on-one chats between a child and a mentor</li>
+          <li>Every mentor is background-checked and trained specifically for young learners</li>
+          <li>Sit in on any class, anytime — no separate parent account required</li>
+          <li>We collect the minimum data needed to run a class, nothing more</li>
+          <li>No long-term contracts — leave whenever the fit isn't right</li>
+        </ul>
+      </div>
+      <div class="safety-card" data-reveal><span class="shield">🛡️</span></div>
+    </div>
+  </section>
+
+  <section class="membership" id="membership">
+    <div class="container">
+      <h2 data-reveal data-kid="Pick your adventure pass!">Membership</h2>
+      <p class="section-sub" data-reveal>Start small. Stay only if it's working for your child.</p>
+      <div class="wheel-wrap" data-reveal>
+        <button class="wheel-arrow wheel-arrow-prev" aria-label="Previous plan">‹</button>
+        <div class="wheel-stage">
+          <div class="wheel" id="membershipWheel">
+            <article class="plan-card">
+              <h3 class="plan-name" data-kid="🐣 Spark">Spark</h3>
+              <p class="plan-price"><span class="amount">PKR 1,500</span><span class="period">/month</span></p>
+              <ul class="plan-features">
+                <li>1 live session every week</li>
+                <li>Monthly project showcase</li>
+                <li>Access to the parent community group</li>
+                <li>Free first class</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline">Start with Spark</a>
+            </article>
+            <article class="plan-card">
+              <span class="plan-ribbon">Most Popular</span>
+              <h3 class="plan-name" data-kid="🚀 Explorer">Explorer</h3>
+              <p class="plan-price"><span class="amount">PKR 2,800</span><span class="period">/month</span></p>
+              <ul class="plan-features">
+                <li>2 live sessions every week</li>
+                <li>Full project portfolio</li>
+                <li>Priority class scheduling</li>
+                <li>Free first class</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline">Start with Explorer</a>
+            </article>
+            <article class="plan-card">
+              <h3 class="plan-name" data-kid="🧠 Genius Circle">Genius Circle</h3>
+              <p class="plan-price"><span class="amount">PKR 4,500</span><span class="period">/month</span></p>
+              <ul class="plan-features">
+                <li>3 live sessions every week</li>
+                <li>Monthly 1:1 mentor check-in</li>
+                <li>Certificate of completion</li>
+                <li>Sibling discount eligible</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline">Start with Genius Circle</a>
+            </article>
+          </div>
+        </div>
+        <button class="wheel-arrow wheel-arrow-next" aria-label="Next plan">›</button>
+      </div>
+      <div class="wheel-dots" id="wheelDots">
+        <button class="dot active" aria-label="Show Spark plan"></button>
+        <button class="dot" aria-label="Show Explorer plan"></button>
+        <button class="dot" aria-label="Show Genius Circle plan"></button>
+      </div>
+      <p class="plan-note">All plans include a free first class and no long-term contract — pause or cancel anytime.</p>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 data-reveal data-kid="Grown-up questions!">Questions parents actually ask</h2>
+      <div class="accordion" data-reveal>
+        <div class="faq-item open">
+          <button class="faq-q" aria-expanded="true">Is this actually safe for my child?<span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Every session runs live in a small group with a background-checked mentor, and you're welcome to sit in on any class. We never set up private one-on-one chats between a mentor and a child.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">My child has barely used a computer — is that a problem?<span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. Most of our grade 1–2 content doesn't require independent typing or navigation at all — mentors guide the screen, and children take part by talking, pointing, and playing.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What if my child loses interest after a few weeks?<span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">There's no long-term contract. Plans are month-to-month, and you can pause or cancel anytime — we'd rather you stay because it's working than because you're locked in.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What data do you collect about my child?<span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Only what's needed to run a class — a name, age or grade, and a parent's contact details. We don't build advertising profiles on children.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I see what my child is actually learning?<span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes — every group has a monthly showcase where children present a small project to parents, plus a short recap shared after every session.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <canvas id="ctaCanvas" aria-hidden="true"></canvas>
+    <div class="container cta-band-inner">
+      <h2 data-reveal data-kid="Ready to meet your AI friends? 🤖✨">Ready for your child's first AI "aha" moment?</h2>
+      <a href="#membership" class="btn btn-primary btn-lg" data-reveal data-kid="Let's go!">Book a Free Trial Class</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="brand">
+        <span class="brand-mark security-texture"><span class="glyph">∞</span></span>
+        <span class="brand-name">InfiniMind</span>
+      </a>
+      <p>AI literacy for grades 1 to 5, taught the way young children actually learn — through play, story, and small groups.</p>
+      <div class="social-row">
+        <!-- Replace with your real profile links once your pages are live -->
+        <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+        <a href="https://twitter.com/login" target="_blank" rel="noopener" aria-label="X / Twitter">𝕏</a>
+        <a href="https://www.youtube.com/account" target="_blank" rel="noopener" aria-label="YouTube">▶️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#safety">Safety</a></li>
+        <li><a href="#membership">Membership</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <address>
+        Karachi, Pakistan<br>
+        hello@infinimind.academy<br>
+        +92 3XX XXXXXXX
+      </address>
+      <!-- Replace this iframe src with your exact address embed from Google Maps later -->
+      <div class="map-frame">
+        <iframe src="https://www.google.com/maps?q=Karachi,Pakistan&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Karachi location map"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 InfiniMind Academy. All rights reserved.</div>
+</footer>
+
+<!-- Replace this WhatsApp number with your business number -->
+<a class="whatsapp-fab" href="https://wa.me/923000000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===================== THEME TOGGLE ===================== */
+(function(){
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
+  });
+})();
+
+/* ===================== NAV BURGER ===================== */
+(function(){
+  var burger = document.getElementById('navBurger');
+  var nav = document.getElementById('siteNav');
+  burger.addEventListener('click', function(){
+    nav.classList.toggle('nav-open');
+  });
+})();
+
+/* ===================== BOARDROOM / PLAYROOM WORLD TOGGLE ===================== */
+(function(){
+  var toggle = document.getElementById('worldToggle');
+  var label = toggle.querySelector('.world-toggle-label');
+  var flash = document.getElementById('worldFlash');
+  var kidEls = document.querySelectorAll('[data-kid]');
+  kidEls.forEach(function(el){ el.dataset.parentHtml = el.innerHTML; });
+  var isKid = false;
+
+  toggle.addEventListener('click', function(){
+    isKid = !isKid;
+    toggle.setAttribute('aria-pressed', String(isKid));
+    var rect = toggle.getBoundingClientRect();
+    flash.style.setProperty('--fx', (rect.left + rect.width / 2) + 'px ' + (rect.top + rect.height / 2) + 'px');
+    flash.classList.remove('active');
+    void flash.offsetWidth;
+    flash.classList.add('active');
+    document.body.classList.toggle('playroom', isKid);
+    kidEls.forEach(function(el){
+      el.innerHTML = isKid ? el.getAttribute('data-kid') : el.dataset.parentHtml;
+    });
+    label.textContent = isKid ? 'Playroom' : 'Boardroom';
+  });
+})();
+
+/* ===================== SCROLL REVEAL ===================== */
+(function(){
+  var els = document.querySelectorAll('[data-reveal]');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduce){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('revealed'); obs.unobserve(e.target); }
+      });
+    }, {threshold:0.15});
+    els.forEach(function(el){ obs.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('revealed'); });
+  }
+})();
+
+/* ===================== FAQ ACCORDION ===================== */
+(function(){
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    btn.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      items.forEach(function(o){
+        if(o !== item){ o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); }
+      });
+      item.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+})();
+
+/* ===================== MEMBERSHIP WHEEL — drag to rotate ===================== */
+(function(){
+  var stage = document.querySelector('.wheel-stage');
+  var wheel = document.getElementById('membershipWheel');
+  var cards = wheel.querySelectorAll('.plan-card');
+  var dots = document.querySelectorAll('#wheelDots .dot');
+  var prevBtn = document.querySelector('.wheel-arrow-prev');
+  var nextBtn = document.querySelector('.wheel-arrow-next');
+  var total = cards.length;
+  var step = 0;
+  var current = 0;
+  var liveRotation = 0;
+  var dragging = false;
+  var startX = 0;
+  var baseRotation = 0;
+  var sensitivity = 0.6;
+
+  function mod(n, m){ return ((n % m) + m) % m; }
+
+  function applyTransform(rot, withTransition){
+    wheel.style.transition = withTransition ? 'transform .6s cubic-bezier(.4,0,.2,1)' : 'none';
+    wheel.style.transform = 'rotateY(' + rot + 'deg)';
+  }
+  function updateActiveUI(idx){
+    cards.forEach(function(c, i){ c.classList.toggle('is-active', i === idx); });
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
+  }
+  function goToIndex(i){
+    var raw = mod(i - current, total);
+    if(raw > total / 2) raw -= total;
+    step += raw;
+    current = i;
+    liveRotation = step * -120;
+    applyTransform(liveRotation, true);
+    updateActiveUI(current);
+  }
+  function settleAfterDrag(){
+    step = Math.round(liveRotation / -120);
+    current = mod(step, total);
+    liveRotation = step * -120;
+    applyTransform(liveRotation, true);
+    updateActiveUI(current);
+  }
+
+  applyTransform(0, false);
+  updateActiveUI(0);
+
+  prevBtn.addEventListener('click', function(){ goToIndex(mod(current - 1, total)); });
+  nextBtn.addEventListener('click', function(){ goToIndex(mod(current + 1, total)); });
+  dots.forEach(function(d, i){ d.addEventListener('click', function(){ goToIndex(i); }); });
+  cards.forEach(function(c, i){ c.addEventListener('click', function(){ if(i !== current && !dragging) goToIndex(i); }); });
+
+  stage.style.touchAction = 'pan-y';
+  stage.style.cursor = 'grab';
+
+  stage.addEventListener('pointerdown', function(e){
+    dragging = true;
+    startX = e.clientX;
+    baseRotation = liveRotation;
+    stage.style.cursor = 'grabbing';
+    try{ stage.setPointerCapture(e.pointerId); }catch(err){}
+  });
+  stage.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    var deltaX = e.clientX - startX;
+    liveRotation = baseRotation + deltaX * sensitivity;
+    applyTransform(liveRotation, false);
+    updateActiveUI(mod(Math.round(liveRotation / -120), total));
+  });
+  function endDrag(){
+    if(!dragging) return;
+    dragging = false;
+    stage.style.cursor = 'grab';
+    settleAfterDrag();
+  }
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointercancel', endDrag);
+  stage.addEventListener('pointerleave', function(){ if(dragging) endDrag(); });
+})();
+
+/* ===================== TILT CARDS — respond to touch / mouse position ===================== */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  var selectors = '.value-card, .program-card, .how-step, .safety-card';
+  var els = document.querySelectorAll(selectors);
+
+  function handleMove(el, clientX, clientY){
+    var rect = el.getBoundingClientRect();
+    var px = (clientX - rect.left) / rect.width;
+    var py = (clientY - rect.top) / rect.height;
+    var rotateY = (px - 0.5) * 14;
+    var rotateX = (0.5 - py) * 14;
+    el.style.transition = 'none';
+    el.style.transform = 'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateZ(4px)';
+  }
+  function reset(el){
+    el.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
+    el.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+  }
+
+  els.forEach(function(el){
+    el.style.willChange = 'transform';
+    el.addEventListener('mousemove', function(e){ handleMove(el, e.clientX, e.clientY); });
+    el.addEventListener('mouseleave', function(){ reset(el); });
+    el.addEventListener('touchmove', function(e){
+      if(e.touches && e.touches[0]){ handleMove(el, e.touches[0].clientX, e.touches[0].clientY); }
+    }, { passive: true });
+    el.addEventListener('touchend', function(){ reset(el); });
+    el.addEventListener('touchcancel', function(){ reset(el); });
+  });
+})();
+
+/* ===================== 3D INFINITY HERO (THREE.JS) ===================== */
+(function(){
+  var canvas = document.getElementById('infinityCanvas');
+  if(!canvas || !window.THREE) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var renderer;
+  try{
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  }catch(e){
+    return;
+  }
+
+  var wrap = canvas.parentElement;
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 0, 6);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  var key = new THREE.PointLight(0xffffff, 1.1, 50);
+  key.position.set(4, 5, 6);
+  scene.add(key);
+  var warm = new THREE.PointLight(0xcda968, 0.9, 50);
+  warm.position.set(-5, -3, 4);
+  scene.add(warm);
+
+  var infinityPoints = [];
+  var pointCount = 200;
+  for(var i = 0; i < pointCount; i++){
+    var a = (i / pointCount) * Math.PI * 2;
+    var x = Math.cos(a) * 1.6;
+    var y = Math.sin(a) * Math.cos(a) * 1.6 * 1.05;
+    infinityPoints.push(new THREE.Vector3(x, y, 0));
+  }
+  var curve = new THREE.CatmullRomCurve3(infinityPoints, true);
+  var geo = new THREE.TubeGeometry(curve, 220, 0.26, 32, true);
+  var mat = new THREE.MeshPhysicalMaterial({
+    color: 0xd7d9df,
+    metalness: 0.55,
+    roughness: 0.18,
+    clearcoat: 1,
+    clearcoatRoughness: 0.12
+  });
+  var mesh = new THREE.Mesh(geo, mat);
+  scene.add(mesh);
+
+  var pointer = { x: 0, y: 0 };
+  function setPointer(clientX, clientY){
+    var rect = wrap.getBoundingClientRect();
+    pointer.x = ((clientX - rect.left) / rect.width - 0.5) * 2;
+    pointer.y = ((clientY - rect.top) / rect.height - 0.5) * 2;
+  }
+  wrap.addEventListener('mousemove', function(e){ setPointer(e.clientX, e.clientY); });
+  wrap.addEventListener('mouseleave', function(){ pointer.x = 0; pointer.y = 0; });
+  wrap.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches[0]){ setPointer(e.touches[0].clientX, e.touches[0].clientY); }
+  }, { passive: true });
+  wrap.addEventListener('touchend', function(){ pointer.x = 0; pointer.y = 0; });
+
+  function resize(){
+    var w = wrap.clientWidth, h = wrap.clientHeight;
+    if(w === 0 || h === 0) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var rafId = null;
+  function tick(){
+    if(!reduceMotion){
+      mesh.rotation.y += 0.006 + pointer.x * 0.012;
+      mesh.rotation.x = Math.sin(Date.now() * 0.0003) * 0.15 + pointer.y * 0.35;
+      camera.position.x += (pointer.x * 0.8 - camera.position.x) * 0.06;
+      camera.lookAt(0, 0, 0);
+    }
+    renderer.render(scene, camera);
+    rafId = requestAnimationFrame(tick);
+  }
+  function startLoop(){ if(rafId === null) tick(); }
+  function stopLoop(){ if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; } }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) startLoop(); else stopLoop(); });
+    }, { threshold: 0.01 }).observe(wrap);
+  } else {
+    startLoop();
+  }
+})();
+
+/* ===================== AMBIENT 3D SPARKS (THREE.JS, CTA band) ===================== */
+(function(){
+  var canvas = document.getElementById('ctaCanvas');
+  if(!canvas || !window.THREE) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var renderer;
+  try{
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  }catch(e){
+    return;
+  }
+
+  var wrap = canvas.parentElement;
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.set(0, 0, 9);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  var key = new THREE.PointLight(0xffffff, 1, 60);
+  key.position.set(5, 6, 8);
+  scene.add(key);
+  var warm = new THREE.PointLight(0xcda968, 0.8, 60);
+  warm.position.set(-6, -4, 6);
+  scene.add(warm);
+
+  var group = new THREE.Group();
+  scene.add(group);
+  var nodes = [];
+  var nodeMat = new THREE.MeshPhysicalMaterial({
+    color: 0xd7d9df,
+    metalness: 0.6,
+    roughness: 0.2,
+    clearcoat: 1,
+    clearcoatRoughness: 0.15
+  });
+  var nodeGeo = new THREE.IcosahedronGeometry(0.16, 0);
+  for(var i = 0; i < 26; i++){
+    var node = new THREE.Mesh(nodeGeo, nodeMat);
+    node.position.set(
+      (Math.random() - 0.5) * 9,
+      (Math.random() - 0.5) * 4,
+      (Math.random() - 0.5) * 4
+    );
+    node.userData.speed = 0.2 + Math.random() * 0.4;
+    node.userData.offset = Math.random() * Math.PI * 2;
+    node.userData.baseY = node.position.y;
+    group.add(node);
+    nodes.push(node);
+  }
+
+  function resize(){
+    var w = wrap.clientWidth, h = wrap.clientHeight;
+    if(w === 0 || h === 0) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var rafId = null;
+  function tick(){
+    if(!reduceMotion){
+      var t = Date.now() * 0.0006;
+      nodes.forEach(function(n){
+        n.position.y = n.userData.baseY + Math.sin(t * n.userData.speed + n.userData.offset) * 0.25;
+        n.rotation.x += 0.004;
+        n.rotation.y += 0.006;
+      });
+      group.rotation.y += 0.0015;
+    }
+    renderer.render(scene, camera);
+    rafId = requestAnimationFrame(tick);
+  }
+  function startLoop(){ if(rafId === null) tick(); }
+  function stopLoop(){ if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; } }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) startLoop(); else stopLoop(); });
+    }, { threshold: 0.01 }).observe(wrap);
+  } else {
+    startLoop();
+  }
+})();
+</script>
+</body>
+</html>
