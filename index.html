@@ -254,13 +254,11 @@ h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;}
 .wheel-wrap{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:50px;}
 .wheel-arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--bg-elevated);font-size:1.3rem;flex-shrink:0;}
 .wheel-arrow:hover{background:var(--bg-soft);}
-.wheel-stage{perspective:1600px;width:320px;height:460px;display:flex;align-items:center;justify-content:center;}
-.wheel{position:relative;width:300px;height:420px;transform-style:preserve-3d;transition:transform .7s var(--ease);}
-.plan-card{position:absolute;inset:0;width:300px;border-radius:var(--radius-lg);background:var(--bg-elevated);border:1px solid var(--line);box-shadow:var(--shadow-card);padding:30px 26px;text-align:left;backface-visibility:visible;transition:opacity .5s var(--ease),filter .5s var(--ease);opacity:.45;filter:blur(.5px) brightness(.75);cursor:pointer;}
+.wheel-stage{perspective:1600px;width:320px;height:560px;display:flex;align-items:center;justify-content:center;}
+.wheel{position:relative;width:300px;height:520px;transform-style:preserve-3d;transition:transform .7s var(--ease);}
+.plan-card{position:absolute;inset:0;width:100%;border-radius:var(--radius-lg);background:var(--bg-elevated);border:1px solid var(--line);box-shadow:var(--shadow-card);padding:30px 26px;text-align:left;backface-visibility:visible;transition:opacity .5s var(--ease),filter .5s var(--ease);opacity:.45;filter:blur(.5px) brightness(.75);cursor:pointer;}
 .plan-card.is-active{opacity:1;filter:none;cursor:default;}
-.plan-card:nth-child(1){transform:rotateY(0deg) translateZ(380px);}
-.plan-card:nth-child(2){transform:rotateY(120deg) translateZ(380px);}
-.plan-card:nth-child(3){transform:rotateY(240deg) translateZ(380px);}
+/* Note: plan-card nth-child transforms are now set dynamically by JS to match fluid stage width */
 .plan-ribbon{position:absolute;top:18px;right:-8px;background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:6px 0 0 6px;}
 .plan-name{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
 .plan-price{margin-bottom:18px;}
@@ -275,12 +273,9 @@ h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;}
 .plan-note{margin-top:22px;color:var(--ink-muted);font-size:.88rem;}
 
 @media (max-width:720px){
-  .wheel-stage{width:260px;height:420px;}
-  .wheel{width:240px;}
-  .plan-card{width:240px;}
-  .plan-card:nth-child(1){transform:rotateY(0deg) translateZ(260px);}
-  .plan-card:nth-child(2){transform:rotateY(120deg) translateZ(260px);}
-  .plan-card:nth-child(3){transform:rotateY(240deg) translateZ(260px);}
+  .wheel-stage{width:min(280px,80vw);height:580px;}
+  .wheel{width:min(260px,75vw);height:540px;}
+  .plan-card{width:100%;}
 }
 
 /* ============================= FAQ ============================= */
@@ -344,16 +339,25 @@ body.playroom .footer{background:var(--bg-elevated);}
   .world-toggle{padding:5px 8px 5px 5px;}
   .world-toggle-label{display:none;}
   .hero-visual{max-height:230px;}
+  .value-card,.program-card,.how-step{padding:22px 18px;}
+  .plan-ribbon{font-size:.66rem;padding:4px 10px;}
+  .plan-features li{font-size:.82rem;}
+  .btn-outline{padding:10px 16px;font-size:.85rem;}
+  section{padding:60px 0;}
 }
 @media (max-width:420px){
-  .wheel-wrap{gap:8px;}
-  .wheel-arrow{width:36px;height:36px;font-size:1.1rem;flex-shrink:0;}
-  .wheel-stage{width:220px;height:400px;}
-  .wheel{width:200px;}
-  .plan-card{width:200px;padding:24px 18px;}
-  .plan-card:nth-child(1){transform:rotateY(0deg) translateZ(220px);}
-  .plan-card:nth-child(2){transform:rotateY(120deg) translateZ(220px);}
-  .plan-card:nth-child(3){transform:rotateY(240deg) translateZ(220px);}
+  .wheel-wrap{gap:6px;}
+  .wheel-arrow{width:32px;height:32px;font-size:1rem;flex-shrink:0;}
+  .wheel-stage{width:min(220px,72vw);height:600px;}
+  .wheel{width:min(200px,68vw);height:560px;}
+  .plan-card{width:100%;padding:22px 16px;}
+}
+@media (max-width:360px){
+  .wheel-stage{width:min(185px,66vw);height:620px;}
+  .wheel{width:min(168px,62vw);height:580px;}
+  .plan-card{width:100%;padding:18px 13px;font-size:.82rem;}
+  .plan-name{font-size:1.1rem;}
+  .plan-price .amount{font-size:1.3rem;}
 }
 
 /* reduced motion */
@@ -529,38 +533,53 @@ body.playroom .footer{background:var(--bg-elevated);}
           <div class="wheel" id="membershipWheel">
             <article class="plan-card" style="border-top:3px solid #00BCD4;">
               <h3 class="plan-name" data-kid="🔭 Explorers">Explorers</h3>
-              <p class="program-grade" style="margin-bottom:10px;">Grades 1–3</p>
+              <p class="program-grade" style="margin-bottom:6px;">Grades 1–3 &middot; 10 Chapters</p>
               <p class="plan-price"><span class="amount">PKR 4,100</span><span class="period">starting from</span></p>
               <ul class="plan-features">
-                <li>Student Workbook (8 chapters)</li>
-                <li>"AI Tales" Reading Book</li>
-                <li>Small-group online classes</li>
-                <li>Free first class</li>
+                <li>What AI is &amp; where it already lives</li>
+                <li>How AI listens, sees &amp; makes guesses</li>
+                <li>Human smart vs AI smart</li>
+                <li>Robots vs AI — clearing the mix-up</li>
+                <li>Spot the AI! activity</li>
+                <li>Talking to a chatbot safely</li>
+                <li>Why AI makes mistakes</li>
+                <li>Free first class included</li>
               </ul>
               <a href="#contact" class="btn btn-outline">Start with Explorers</a>
             </article>
             <article class="plan-card" style="border-top:3px solid #9C27B0;">
               <span class="plan-ribbon">Most Popular</span>
               <h3 class="plan-name" data-kid="🛠️ Builders">Builders</h3>
-              <p class="program-grade" style="margin-bottom:10px;">Grades 4–5</p>
+              <p class="program-grade" style="margin-bottom:6px;">Grades 4–5 &middot; 9 Chapters</p>
               <p class="plan-price"><span class="amount">PKR 4,400</span><span class="period">starting from</span></p>
               <ul class="plan-features">
-                <li>Student Workbook (10 chapters)</li>
-                <li>"AI Chronicles" Reading Book</li>
-                <li>Small-group online classes</li>
-                <li>Free first class</li>
+                <li>AI recap — models &amp; agents explained</li>
+                <li>What a website actually is</li>
+                <li>HTML basics — tags, links &amp; images</li>
+                <li>CSS basics — colours, fonts &amp; spacing</li>
+                <li>What JavaScript does</li>
+                <li>Frontend vs backend</li>
+                <li>What a bug is &amp; how to fix it</li>
+                <li>What a coding agent does</li>
+                <li>Mini build &amp; showcase · Free first class</li>
               </ul>
               <a href="#contact" class="btn btn-outline">Start with Builders</a>
             </article>
             <article class="plan-card" style="border-top:3px solid #FF6F00;">
               <h3 class="plan-name" data-kid="🚀 Innovators">Innovators</h3>
-              <p class="program-grade" style="margin-bottom:10px;">Grades 6–7</p>
+              <p class="program-grade" style="margin-bottom:6px;">Grades 6–7 &middot; 12 Chapters</p>
               <p class="plan-price"><span class="amount">PKR 4,900</span><span class="period">starting from</span></p>
               <ul class="plan-features">
-                <li>Student Workbook (12 chapters)</li>
-                <li>"AI Frontiers" Reading Book</li>
-                <li>Coding, ML basics &amp; capstone project</li>
-                <li>Free first class</li>
+                <li>AI coding agents &amp; their real limits</li>
+                <li>HTML &amp; CSS deeper — layouts &amp; forms</li>
+                <li>JavaScript — variables, logic &amp; events</li>
+                <li>Bootstrap CSS framework</li>
+                <li>Frontend vs backend — APIs &amp; databases</li>
+                <li>Debugging mindset &amp; error messages</li>
+                <li>Intro to Python</li>
+                <li>Git &amp; GitHub — version control</li>
+                <li>Portfolios, Fiverr/Upwork &amp; capstone</li>
+                <li>Free first class included</li>
               </ul>
               <a href="#contact" class="btn btn-outline">Start with Innovators</a>
             </article>
@@ -740,7 +759,7 @@ body.playroom .footer{background:var(--bg-elevated);}
   });
 })();
 
-/* ===================== MEMBERSHIP WHEEL — drag to rotate ===================== */
+/* ===================== MEMBERSHIP WHEEL — drag to rotate, fully fluid ===================== */
 (function(){
   var stage = document.querySelector('.wheel-stage');
   var wheel = document.getElementById('membershipWheel');
@@ -758,6 +777,19 @@ body.playroom .footer{background:var(--bg-elevated);}
   var sensitivity = 0.6;
 
   function mod(n, m){ return ((n % m) + m) % m; }
+
+  /* Read the actual card width from the DOM so translateZ always matches CSS */
+  function getRadius(){
+    return stage.offsetWidth + 10;
+  }
+
+  function applyCardPositions(){
+    var r = getRadius();
+    cards.forEach(function(c, i){
+      var baseAngle = i * (360 / total);
+      c.style.transform = 'rotateY(' + baseAngle + 'deg) translateZ(' + r + 'px)';
+    });
+  }
 
   function applyTransform(rot, withTransition){
     wheel.style.transition = withTransition ? 'transform .6s cubic-bezier(.4,0,.2,1)' : 'none';
@@ -784,6 +816,19 @@ body.playroom .footer{background:var(--bg-elevated);}
     updateActiveUI(current);
   }
 
+  /* Re-apply card positions on resize so radius stays correct */
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      applyCardPositions();
+      /* Re-settle to current position with new radius */
+      liveRotation = step * -120;
+      applyTransform(liveRotation, false);
+    }, 100);
+  });
+
+  applyCardPositions();
   applyTransform(0, false);
   updateActiveUI(0);
 
