@@ -120,7 +120,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;}
 [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
 [data-reveal].revealed{opacity:1;transform:none;}
 
-/* currency / security texture — used behind the logo mark */
+/* currency / security texture */
 .security-texture{position:relative;overflow:hidden;}
 .security-texture::before{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -142,9 +142,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.01em;}
   background:linear-gradient(120deg,rgba(255,255,255,.4),rgba(255,255,255,0) 60%);
   transform:rotate(-10deg);filter:blur(1px);
 }
-.brand-mark .glyph-svg{
-  position:relative;z-index:1;
-}
+.brand-mark .glyph-svg{position:relative;z-index:1;}
 body.playroom .brand-mark{animation:bob 2.4s ease-in-out infinite;}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-3px) rotate(-4deg);}}
 .brand-name{font-family:var(--font-display);font-weight:700;font-size:1.12rem;}
@@ -208,6 +206,31 @@ section{padding:90px 0;}
 .section-sub{color:var(--ink-muted);margin-top:10px;font-size:1.02rem;}
 h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;}
 
+/* ============================= TILT CARD WRAPPER ============================= */
+/*
+  KEY FIX: The perspective must live on a WRAPPER element, not on the card itself.
+  When perspective() is applied directly to the card via its transform property,
+  the browser recalculates the stacking context and text can visually "slip" outside
+  the card bounds during rotation. By giving the wrapper the perspective context
+  and only rotating/translating the card, all children stay clipped and stable.
+*/
+.tilt-wrap{
+  perspective: 900px;
+  /* Ensure wrapper matches card dimensions exactly */
+}
+.tilt-card{
+  width: 100%;
+  height: 100%;
+  /* transform-style flat (default) keeps children in the same plane — no text drift */
+  transform-style: flat;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+  will-change: transform;
+  /* Clip any subpixel overflow that could appear during rotation */
+  overflow: hidden;
+  /* Prevent layout shifts caused by translateZ during tilt */
+  backface-visibility: hidden;
+}
+
 /* value */
 .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:42px;}
 .value-card{background:var(--bg-elevated);border:1px solid var(--line);border-radius:var(--radius-lg);padding:30px;box-shadow:var(--shadow-card);}
@@ -240,7 +263,7 @@ h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;}
 .safety-copy li::before{content:"✓";color:var(--accent);font-weight:800;}
 .safety-card{background:var(--bg-elevated);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:40px;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;position:relative;}
 
-/* shared 3D slab depth — a thin top highlight + inner shading on top of the ambient drop shadow */
+/* 3D slab depth on cards */
 .value-card,.program-card,.how-step,.safety-card,.plan-card{
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.10),
@@ -258,7 +281,6 @@ h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;}
 .wheel{position:relative;width:300px;height:520px;transform-style:preserve-3d;transition:transform .7s var(--ease);}
 .plan-card{position:absolute;inset:0;width:100%;border-radius:var(--radius-lg);background:var(--bg-elevated);border:1px solid var(--line);box-shadow:var(--shadow-card);padding:30px 26px;text-align:left;backface-visibility:visible;transition:opacity .5s var(--ease),filter .5s var(--ease);opacity:.45;filter:blur(.5px) brightness(.75);cursor:pointer;}
 .plan-card.is-active{opacity:1;filter:none;cursor:default;}
-/* Note: plan-card nth-child transforms are now set dynamically by JS to match fluid stage width */
 .plan-ribbon{position:absolute;top:18px;right:-8px;background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:6px 0 0 6px;}
 .plan-name{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
 .plan-price{margin-bottom:18px;}
@@ -305,8 +327,6 @@ body.playroom .footer{background:var(--bg-elevated);}
 .footer-col h4{font-size:.95rem;margin-bottom:16px;}
 .footer-col ul{display:flex;flex-direction:column;gap:10px;font-size:.92rem;color:var(--ink-muted);}
 .footer-col address{font-style:normal;color:var(--ink-muted);font-size:.92rem;margin-bottom:14px;line-height:1.6;}
-.map-frame{border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;height:160px;margin-top:14px;}
-.map-frame iframe{width:100%;height:100%;border:0;filter:grayscale(.2);}
 .footer-bottom{padding:22px 0;text-align:center;font-size:.82rem;color:var(--ink-muted);}
 
 .whatsapp-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);z-index:70;}
@@ -435,17 +455,23 @@ body.playroom .footer{background:var(--bg-elevated);}
     <div class="container">
       <h2 data-reveal data-kid="Why learning about AI is fun!">Why AI literacy, why now</h2>
       <div class="value-grid">
-        <div class="value-card" data-reveal>
-          <h3>Already in their world</h3>
-          <p>Voice assistants, recommendation feeds, AI art generators — children use AI daily, often without knowing it. Guided exposure beats unguided exposure.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card value-card">
+            <h3>Already in their world</h3>
+            <p>Voice assistants, recommendation feeds, AI art generators — children use AI daily, often without knowing it. Guided exposure beats unguided exposure.</p>
+          </div>
         </div>
-        <div class="value-card" data-reveal>
-          <h3>Curiosity, not coding</h3>
-          <p>No keyboard-heavy syllabus, no pressure. Age-appropriate concepts, simple analogies, and a lot of asking "how does that work?"</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card value-card">
+            <h3>Curiosity, not coding</h3>
+            <p>No keyboard-heavy syllabus, no pressure. Age-appropriate concepts, simple analogies, and a lot of asking "how does that work?"</p>
+          </div>
         </div>
-        <div class="value-card" data-reveal>
-          <h3>Confidence, not fear</h3>
-          <p>Children who understand how a tool works tend to trust it appropriately — neither blindly nor anxiously. That's the habit we're building.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card value-card">
+            <h3>Confidence, not fear</h3>
+            <p>Children who understand how a tool works tend to trust it appropriately — neither blindly nor anxiously. That's the habit we're building.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -456,23 +482,29 @@ body.playroom .footer{background:var(--bg-elevated);}
       <h2 data-reveal data-kid="Pick your adventure!">Three tracks, built by age</h2>
       <p class="section-sub" data-reveal>Different ages learn differently — so the curriculum, pace, and projects change with them. Every track includes a Student Workbook, a Reading Book, and small-group online classes.</p>
       <div class="programs-grid programs-grid-3">
-        <div class="program-card" data-reveal style="border-top:3px solid #00BCD4;">
-          <span class="program-tag" style="color:#00BCD4;">Explorers</span>
-          <h3>First steps into AI</h3>
-          <p class="program-grade">Grades 1–3</p>
-          <p>Understanding AI basics, spotting AI in everyday life, and learning smarter ways to think — through stories, play, and the "AI Tales" reading book.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card program-card" style="border-top:3px solid #00BCD4;">
+            <span class="program-tag" style="color:#00BCD4;">Explorers</span>
+            <h3>First steps into AI</h3>
+            <p class="program-grade">Grades 1–3</p>
+            <p>Understanding AI basics, spotting AI in everyday life, and learning smarter ways to think — through stories, play, and the "AI Tales" reading book.</p>
+          </div>
         </div>
-        <div class="program-card" data-reveal style="border-top:3px solid #9C27B0;">
-          <span class="program-tag" style="color:#CE93D8;">Builders</span>
-          <h3>AI in everyday life</h3>
-          <p class="program-grade">Grades 4–5</p>
-          <p>How AI actually works, using real AI tools responsibly, writing better prompts, and implementing AI in school and daily tasks — with the "AI Chronicles" reading book.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card program-card" style="border-top:3px solid #9C27B0;">
+            <span class="program-tag" style="color:#CE93D8;">Builders</span>
+            <h3>AI in everyday life</h3>
+            <p class="program-grade">Grades 4–5</p>
+            <p>How AI actually works, using real AI tools responsibly, writing better prompts, and implementing AI in school and daily tasks — with the "AI Chronicles" reading book.</p>
+          </div>
         </div>
-        <div class="program-card" data-reveal style="border-top:3px solid #FF6F00;">
-          <span class="program-tag" style="color:#FFB74D;">Innovators</span>
-          <h3>Pro-level AI skills</h3>
-          <p class="program-grade">Grades 6–7</p>
-          <p>Intro to coding in Python and Scratch, how AI models are trained, machine learning, AI ethics, and a capstone project — with the "AI Frontiers" reading book.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card program-card" style="border-top:3px solid #FF6F00;">
+            <span class="program-tag" style="color:#FFB74D;">Innovators</span>
+            <h3>Pro-level AI skills</h3>
+            <p class="program-grade">Grades 6–7</p>
+            <p>Intro to coding in Python and Scratch, how AI models are trained, machine learning, AI ethics, and a capstone project — with the "AI Frontiers" reading book.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -482,25 +514,33 @@ body.playroom .footer{background:var(--bg-elevated);}
     <div class="container">
       <h2 data-reveal data-kid="How a season works!">How a term at InfiniMind works</h2>
       <div class="how-steps">
-        <div class="how-step" data-reveal>
-          <span class="num">01</span>
-          <h3>Book a free trial class</h3>
-          <p>Meet a mentor and try one live session — no card required.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card how-step">
+            <span class="num">01</span>
+            <h3>Book a free trial class</h3>
+            <p>Meet a mentor and try one live session — no card required.</p>
+          </div>
         </div>
-        <div class="how-step" data-reveal>
-          <span class="num">02</span>
-          <h3>Join a small group</h3>
-          <p>Max 6–8 children per group, matched by age and grade.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card how-step">
+            <span class="num">02</span>
+            <h3>Join a small group</h3>
+            <p>Max 6–8 children per group, matched by age and grade.</p>
+          </div>
         </div>
-        <div class="how-step" data-reveal>
-          <span class="num">03</span>
-          <h3>Weekly live sessions</h3>
-          <p>Short, 30-minute sessions that respect a child's attention span.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card how-step">
+            <span class="num">03</span>
+            <h3>Weekly live sessions</h3>
+            <p>Short, 30-minute sessions that respect a child's attention span.</p>
+          </div>
         </div>
-        <div class="how-step" data-reveal>
-          <span class="num">04</span>
-          <h3>Monthly showcase</h3>
-          <p>Children present one project to parents — proof of progress, not just a certificate.</p>
+        <div class="tilt-wrap" data-reveal>
+          <div class="tilt-card how-step">
+            <span class="num">04</span>
+            <h3>Monthly showcase</h3>
+            <p>Children present one project to parents — proof of progress, not just a certificate.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -519,7 +559,9 @@ body.playroom .footer{background:var(--bg-elevated);}
           <li>No long-term contracts — leave whenever the fit isn't right</li>
         </ul>
       </div>
-      <div class="safety-card" data-reveal><span class="shield">🛡️</span></div>
+      <div class="tilt-wrap" data-reveal>
+        <div class="tilt-card safety-card"><span class="shield">🛡️</span></div>
+      </div>
     </div>
   </section>
 
@@ -757,7 +799,7 @@ body.playroom .footer{background:var(--bg-elevated);}
   });
 })();
 
-/* ===================== MEMBERSHIP WHEEL — drag to rotate, fully fluid ===================== */
+/* ===================== MEMBERSHIP WHEEL ===================== */
 (function(){
   var stage = document.querySelector('.wheel-stage');
   var wheel = document.getElementById('membershipWheel');
@@ -776,7 +818,6 @@ body.playroom .footer{background:var(--bg-elevated);}
 
   function mod(n, m){ return ((n % m) + m) % m; }
 
-  /* Read the actual card width from the DOM so translateZ always matches CSS */
   function getRadius(){
     return stage.offsetWidth + 10;
   }
@@ -814,13 +855,11 @@ body.playroom .footer{background:var(--bg-elevated);}
     updateActiveUI(current);
   }
 
-  /* Re-apply card positions on resize so radius stays correct */
   var resizeTimer;
   window.addEventListener('resize', function(){
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function(){
       applyCardPositions();
-      /* Re-settle to current position with new radius */
       liveRotation = step * -120;
       applyTransform(liveRotation, false);
     }, 100);
@@ -863,36 +902,54 @@ body.playroom .footer{background:var(--bg-elevated);}
   stage.addEventListener('pointerleave', function(){ if(dragging) endDrag(); });
 })();
 
-/* ===================== TILT CARDS — respond to touch / mouse position ===================== */
+/* ===================== TILT CARDS — FIXED VERSION ===================== */
+/*
+  Root cause of text "coming down" the card:
+  The old code set perspective() INSIDE the card's own transform property.
+  When a transformed element contains text, the browser re-evaluates the
+  stacking context at every frame. The perspective combined with rotateX/Y
+  shifts the text's paint origin, making it appear to slide/fall.
+
+  Fix: perspective lives on .tilt-wrap (the parent). The card itself only
+  receives rotateX + rotateY — no perspective() in its own transform.
+  Text is always painted in the card's local flat plane.
+*/
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduce) return;
-  var selectors = '.value-card, .program-card, .how-step, .safety-card';
-  var els = document.querySelectorAll(selectors);
 
-  function handleMove(el, clientX, clientY){
-    var rect = el.getBoundingClientRect();
-    var px = (clientX - rect.left) / rect.width;
-    var py = (clientY - rect.top) / rect.height;
-    var rotateY = (px - 0.5) * 14;
-    var rotateX = (0.5 - py) * 14;
-    el.style.transition = 'none';
-    el.style.transform = 'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateZ(4px)';
-  }
-  function reset(el){
-    el.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
-    el.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-  }
+  var wraps = document.querySelectorAll('.tilt-wrap');
 
-  els.forEach(function(el){
-    el.style.willChange = 'transform';
-    el.addEventListener('mousemove', function(e){ handleMove(el, e.clientX, e.clientY); });
-    el.addEventListener('mouseleave', function(){ reset(el); });
-    el.addEventListener('touchmove', function(e){
-      if(e.touches && e.touches[0]){ handleMove(el, e.touches[0].clientX, e.touches[0].clientY); }
+  wraps.forEach(function(wrap){
+    var card = wrap.querySelector('.tilt-card');
+    if(!card) return;
+
+    function handleMove(clientX, clientY){
+      var rect = wrap.getBoundingClientRect();
+      var px = (clientX - rect.left) / rect.width;
+      var py = (clientY - rect.top) / rect.height;
+      /* Clamp to [0,1] so edge-entry glitches don't spike the rotation */
+      px = Math.max(0, Math.min(1, px));
+      py = Math.max(0, Math.min(1, py));
+      var rotY = (px - 0.5) * 12;   /* max ±6deg on each axis — subtle but clear */
+      var rotX = (0.5 - py) * 12;
+      card.style.transition = 'transform .08s linear';
+      /* No perspective() here — it's already on the wrapper via CSS */
+      card.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(6px)';
+    }
+
+    function reset(){
+      card.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
+    }
+
+    wrap.addEventListener('mousemove', function(e){ handleMove(e.clientX, e.clientY); });
+    wrap.addEventListener('mouseleave', reset);
+    wrap.addEventListener('touchmove', function(e){
+      if(e.touches && e.touches[0]){ handleMove(e.touches[0].clientX, e.touches[0].clientY); }
     }, { passive: true });
-    el.addEventListener('touchend', function(){ reset(el); });
-    el.addEventListener('touchcancel', function(){ reset(el); });
+    wrap.addEventListener('touchend', reset);
+    wrap.addEventListener('touchcancel', reset);
   });
 })();
 
@@ -1075,4 +1132,3 @@ body.playroom .footer{background:var(--bg-elevated);}
 </script>
 </body>
 </html>
-
