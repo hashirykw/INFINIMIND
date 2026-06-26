@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>InfiniMind Academy — AI Tech Academy for Young Minds</title>
 <meta name="description" content="InfiniMind Academy — a premium AI tech academy for children grades 1–7. Explorers, Builders, and Innovators tracks. Book a free trial class today.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300d4ff'/%3E%3Cstop offset='100%25' stop-color='%23005f73'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='900' font-family='Arial,sans-serif' text-anchor='middle' fill='%23020408'%3E%E2%88%9E%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300d4ff'/%3E%3Cstop offset='100%25' stop-color='%23005f73'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Ctext x='90' y='124' font-size='100' font-weight='900' font-family='Arial,sans-serif' text-anchor='middle' fill='%23020408'%3E%E2%88%9E%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -164,14 +166,39 @@ h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.02em;line-height:1.
 
 /* Theme switcher */
 .theme-picker{position:relative;}
-.theme-picker-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .2s;background:var(--surface);}
-.theme-picker-btn:hover{border-color:var(--line-bright);}
-.theme-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:6px;display:flex;flex-direction:column;gap:4px;min-width:140px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .22s var(--ease);z-index:200;box-shadow:var(--shadow);}
+.theme-picker-btn{
+  height:34px;padding:0 12px;border-radius:8px;
+  border:1px solid var(--line);background:var(--surface);
+  display:flex;align-items:center;gap:7px;
+  font-size:.78rem;font-weight:600;letter-spacing:.04em;
+  color:var(--ink-2);font-family:var(--font-display);
+  transition:all .2s;white-space:nowrap;
+}
+.theme-picker-btn:hover{border-color:var(--line-bright);color:var(--ink);}
+.theme-picker-btn svg{flex-shrink:0;opacity:.7;transition:opacity .2s;}
+.theme-picker-btn:hover svg{opacity:1;}
+.theme-dropdown{
+  position:absolute;top:calc(100% + 8px);right:0;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);padding:5px;
+  display:flex;flex-direction:column;gap:2px;min-width:148px;
+  opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:all .22s var(--ease);z-index:200;box-shadow:var(--shadow);
+}
 .theme-picker:hover .theme-dropdown,.theme-picker:focus-within .theme-dropdown{opacity:1;pointer-events:all;transform:none;}
-.theme-opt{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .15s;color:var(--ink-2);}
+.theme-opt{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 10px;border-radius:8px;
+  font-size:.8rem;font-weight:600;cursor:pointer;
+  transition:background .15s;color:var(--ink-2);
+  font-family:var(--font-display);
+}
 .theme-opt:hover{background:var(--accent-dim);color:var(--ink);}
-.theme-opt.active{color:var(--accent);}
-.theme-swatch{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+.theme-opt.active{color:var(--accent);background:rgba(255,255,255,.04);}
+.theme-swatch{
+  width:12px;height:12px;border-radius:50%;flex-shrink:0;
+  box-shadow:0 0 6px currentColor;
+}
 
 /* Burger */
 .nav-burger{display:none;width:38px;height:38px;border-radius:8px;border:1px solid var(--line);align-items:center;justify-content:center;flex-direction:column;gap:5px;background:var(--surface);flex-shrink:0;}
@@ -511,6 +538,118 @@ select.form-input{appearance:none;cursor:pointer;}
 /* ===== SCROLL PROGRESS ===== */
 .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--green));z-index:200;transition:width .1s;}
 
+/* ===== PAGE TRANSITION OVERLAY ===== */
+.page-transition{position:fixed;inset:0;z-index:9999;pointer-events:none;background:var(--bg);transform:scaleY(0);transform-origin:bottom;transition:transform .55s cubic-bezier(.86,0,.07,1);}
+.page-transition.enter{transform-origin:top;transform:scaleY(1);}
+.page-transition.active{transform:scaleY(1);}
+
+/* ===== LINK RIPPLE ===== */
+.btn{overflow:hidden;}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.28);transform:scale(0);animation:rippleAnim .55s linear;pointer-events:none;}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
+
+/* ===== HERO ENTRANCE ANIMATIONS ===== */
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(36px);}to{opacity:1;transform:none;}}
+@keyframes heroFadeRight{from{opacity:0;transform:translateX(-28px);}to{opacity:1;transform:none;}}
+@keyframes heroScaleIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+.hero-copy .hero-eyebrow{animation:heroFadeRight .7s .1s both var(--ease);}
+.hero-copy h1{animation:heroFadeUp .8s .22s both var(--ease);}
+.hero-copy .hero-sub{animation:heroFadeUp .7s .38s both var(--ease);}
+.hero-copy .hero-ctas{animation:heroFadeUp .7s .5s both var(--ease);}
+.hero-copy .hero-stats{animation:heroFadeUp .7s .62s both var(--ease);}
+.hero-visual{animation:heroScaleIn .9s .3s both var(--ease);}
+
+/* ===== STAGGER REVEAL ===== */
+[data-stagger]>*{opacity:0;transform:translateY(22px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
+[data-stagger].revealed>*:nth-child(1){opacity:1;transform:none;transition-delay:.05s;}
+[data-stagger].revealed>*:nth-child(2){opacity:1;transform:none;transition-delay:.14s;}
+[data-stagger].revealed>*:nth-child(3){opacity:1;transform:none;transition-delay:.23s;}
+[data-stagger].revealed>*:nth-child(4){opacity:1;transform:none;transition-delay:.32s;}
+[data-stagger].revealed>*:nth-child(5){opacity:1;transform:none;transition-delay:.41s;}
+[data-stagger].revealed>*:nth-child(6){opacity:1;transform:none;transition-delay:.5s;}
+
+/* ===== SECTION SLIDE-IN (left / right) ===== */
+[data-reveal-left]{opacity:0;transform:translateX(-32px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+[data-reveal-left].revealed{opacity:1;transform:none;}
+[data-reveal-right]{opacity:0;transform:translateX(32px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+[data-reveal-right].revealed{opacity:1;transform:none;}
+
+/* ===== TOUCH FEEDBACK ===== */
+@media(hover:none){
+  .btn:active{transform:scale(.95)!important;opacity:.88;}
+  .why-card:active,.prog-card:active,.price-card:active,.testimonial-card:active,.cert-card:active,.curriculum-item:active,.safety-item:active{transform:scale(.98);box-shadow:none;}
+  .social-link:active,.footer-col a:active,.nav-links a:active{opacity:.65;}
+  /* Show nav links in mobile via drawer — ensure tap areas are large enough */
+  .mobile-drawer a{min-height:56px;display:flex;align-items:center;}
+}
+
+/* ===== TOUCH SWIPE for tabs ===== */
+.tab-controls{-webkit-overflow-scrolling:touch;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.tab-controls::-webkit-scrollbar{display:none;}
+
+/* ===== SMOOTH CARD ENTRANCE ===== */
+.why-card,.prog-card,.price-card,.testimonial-card,.cert-card{
+  transition:transform .32s var(--ease),box-shadow .32s var(--ease),border-color .25s,opacity .55s var(--ease);
+}
+
+/* ===== ACTIVE NAV LINK ===== */
+.nav-links a.nav-active{color:var(--accent);background:var(--accent-dim);}
+
+/* ===== SECTION TITLE UNDERLINE ANIMATE ===== */
+.section-title-line{display:inline-block;position:relative;}
+.section-title-line::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .7s .3s var(--ease);border-radius:2px;}
+.section-title-line.revealed::after{width:100%;}
+
+/* ===== FLOATING BADGE POLISH ===== */
+.hero-floating-badge{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+
+/* ===== SCROLL TO TOP ===== */
+.scroll-top-btn{position:fixed;bottom:96px;right:28px;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line-bright);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.1rem;z-index:88;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s var(--ease),border-color .2s;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);}
+.scroll-top-btn.visible{opacity:1;pointer-events:auto;}
+.scroll-top-btn:hover{transform:translateY(-3px);border-color:var(--accent);}
+.scroll-top-btn:active{transform:scale(.93);}
+
+/* ===== GLOWING ACCENT LINE ON SECTION LABELS ===== */
+.section-label::before{box-shadow:0 0 8px var(--accent);}
+
+/* ===== TESTIMONIALS CAROUSEL (mobile swipe) ===== */
+@media(max-width:800px){
+  .testimonials-grid{display:flex;flex-direction:row;overflow-x:auto;gap:16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:8px;}
+  .testimonials-grid::-webkit-scrollbar{display:none;}
+  .testimonial-card{flex:0 0 85vw;scroll-snap-align:start;}
+}
+
+/* ===== PROGRAMS GRID (mobile swipe) ===== */
+@media(max-width:900px){
+  .programs-grid{display:flex;flex-direction:row;overflow-x:auto;gap:18px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:8px;max-width:none;}
+  .programs-grid::-webkit-scrollbar{display:none;}
+  .prog-card{flex:0 0 82vw;scroll-snap-align:start;max-width:380px;}
+}
+
+/* ===== CURRICULUM GRID (mobile swipe) ===== */
+@media(max-width:600px){
+  .curriculum-grid{display:flex;flex-direction:column;}
+}
+
+/* ===== PULSE DOT ===== */
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.55);}}
+
+/* ===== GLOW ON FEATURED CARD HOVER ===== */
+.price-card.featured:hover{box-shadow:0 0 80px -16px color-mix(in srgb,var(--accent) 45%,transparent),var(--card-hover-shadow);}
+
+/* ===== IMAGE SMOOTH LOAD ===== */
+img{transition:opacity .4s var(--ease);}
+
+/* ===== FOCUS RING VISIBILITY ===== */
+*:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px;}
+
+/* ===== MOBILE FONT TWEAK ===== */
+@media(max-width:480px){
+  .hero h1{font-size:clamp(2rem,8vw,2.8rem);}
+  h2.section-title{font-size:clamp(1.6rem,6vw,2.2rem);}
+  section{padding:72px 0;}
+}
+
 /* ===== WHATSAPP FAB ===== */
 .whatsapp-fab{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 8px 24px -4px rgba(37,211,102,.45);transition:transform .3s var(--spring);}
 .whatsapp-fab:hover{transform:scale(1.1) translateY(-2px);}
@@ -519,6 +658,8 @@ select.form-input{appearance:none;cursor:pointer;}
 <body>
 
 <div class="scroll-progress" id="scrollProgress"></div>
+<div class="page-transition" id="pageTransition"></div>
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- NAV -->
 <nav class="nav" id="siteNav">
@@ -538,7 +679,20 @@ select.form-input{appearance:none;cursor:pointer;}
     </div>
     <div class="nav-right">
       <div class="theme-picker">
-        <button class="theme-picker-btn" title="Change theme">🎨</button>
+        <button class="theme-picker-btn" title="Change theme">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8" cy="8" r="3" fill="currentColor" opacity=".9"/>
+            <circle cx="8" cy="2" r="1.2" fill="currentColor" opacity=".6"/>
+            <circle cx="8" cy="14" r="1.2" fill="currentColor" opacity=".6"/>
+            <circle cx="2" cy="8" r="1.2" fill="currentColor" opacity=".6"/>
+            <circle cx="14" cy="8" r="1.2" fill="currentColor" opacity=".6"/>
+            <circle cx="3.8" cy="3.8" r="1.1" fill="currentColor" opacity=".4"/>
+            <circle cx="12.2" cy="3.8" r="1.1" fill="currentColor" opacity=".4"/>
+            <circle cx="3.8" cy="12.2" r="1.1" fill="currentColor" opacity=".4"/>
+            <circle cx="12.2" cy="12.2" r="1.1" fill="currentColor" opacity=".4"/>
+          </svg>
+          Theme
+        </button>
         <div class="theme-dropdown">
           <div class="theme-opt active" data-t="dark">
             <div class="theme-swatch" style="background:#00d4ff;"></div> Dark Blue
@@ -682,7 +836,7 @@ select.form-input{appearance:none;cursor:pointer;}
 <!-- ===== STATS BAND ===== -->
 <div class="stats-band">
   <div class="container">
-    <div class="stats-grid">
+    <div class="stats-grid" data-stagger>
       <div data-reveal>
         <div class="big-stat gt-accent"><span class="count-num" data-target="2400">0</span>+</div>
         <div class="big-stat-label">Active Students</div>
@@ -709,7 +863,7 @@ select.form-input{appearance:none;cursor:pointer;}
     <div class="section-label" data-reveal>Why InfiniMind</div>
     <h2 class="section-title" data-reveal>The Academy Built Differently</h2>
     <p class="section-sub" data-reveal>We designed every class, every project, every safeguard around one idea: AI literacy should feel like an unfair advantage.</p>
-    <div class="why-grid">
+    <div class="why-grid" data-stagger>
       <div class="why-card card-hover" data-reveal>
         <div class="why-icon">🧠</div>
         <h3>Already in Their World</h3>
@@ -965,11 +1119,39 @@ select.form-input{appearance:none;cursor:pointer;}
 </section>
 
 <!-- ===== AI CHAT ===== -->
+<style>
+/* ===== CHATBOT EXTRAS ===== */
+.chat-send-panel{padding:14px 20px;border-top:1px solid var(--line);background:color-mix(in srgb,var(--accent) 4%,var(--bg-2));display:none;flex-direction:column;gap:10px;}
+.chat-send-panel.visible{display:flex;}
+.chat-send-title{font-size:.78rem;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em;}
+.chat-send-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.chat-send-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .22s var(--ease);border:none;font-family:var(--font-display);}
+.chat-send-wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;box-shadow:0 6px 20px -6px rgba(37,211,102,.5);}
+.chat-send-wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px -6px rgba(37,211,102,.65);}
+.chat-send-email{background:var(--surface);border:1px solid var(--line-bright)!important;color:var(--accent);}
+.chat-send-email:hover{background:var(--accent-dim);transform:translateY(-2px);}
+.chat-send-note{font-size:.74rem;color:var(--ink-3);}
+/* Email modal */
+.email-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.email-modal-bg.open{opacity:1;pointer-events:all;}
+.email-modal{background:var(--surface);border:1px solid var(--line-bright);border-radius:var(--r-xl);padding:36px;max-width:520px;width:100%;box-shadow:0 40px 80px -20px rgba(0,0,0,.8);transform:scale(.94) translateY(16px);transition:transform .35s var(--spring);}
+.email-modal-bg.open .email-modal{transform:none;}
+.email-modal h3{font-size:1.25rem;font-weight:700;margin-bottom:8px;}
+.email-modal p{color:var(--ink-2);font-size:.9rem;margin-bottom:22px;line-height:1.6;}
+.email-modal textarea{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;color:var(--ink);font-size:.85rem;line-height:1.6;resize:none;height:200px;outline:none;font-family:var(--font-body);margin-bottom:16px;transition:border-color .2s;}
+.email-modal textarea:focus{border-color:var(--line-bright);}
+.email-modal-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.email-copy-note{font-size:.76rem;color:var(--ink-3);margin-top:10px;}
+.chat-msg-actions{display:flex;gap:8px;margin-top:6px;padding-left:42px;}
+.msg-action-btn{font-size:.72rem;color:var(--ink-3);background:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;cursor:pointer;transition:all .2s;}
+.msg-action-btn:hover{border-color:var(--line-bright);color:var(--ink);}
+</style>
+
 <section class="ai-demo-section" id="demo">
   <div class="container">
     <div class="section-label" data-reveal>Ask Us Anything</div>
     <h2 class="section-title" data-reveal>Chat with Our Academy Assistant</h2>
-    <p class="section-sub" data-reveal>Have a question about programs, pricing, safety, or enrollment? Our AI assistant knows everything about InfiniMind — ask away.</p>
+    <p class="section-sub" data-reveal>Have a question about programs, pricing, safety, or enrollment? Ask below — then send your full conversation straight to our team on WhatsApp or email.</p>
     <div class="demo-wrap" data-reveal>
       <div class="demo-header">
         <div class="demo-dots">
@@ -983,23 +1165,53 @@ select.form-input{appearance:none;cursor:pointer;}
       <div class="demo-messages" id="demoMessages">
         <div class="demo-msg ai">
           <div class="demo-avatar ai-av">∞</div>
-          <div class="demo-bubble">Hi! I'm the InfiniMind Academy assistant. Ask me anything about our programs, pricing, safety policies, how enrollment works, what your child will learn — I know it all. What would you like to know? 😊</div>
+          <div class="demo-bubble">Hi! I'm the InfiniMind Academy assistant 👋 I can answer anything about our programs, pricing, safety, curriculum, certificates, or how enrollment works. What would you like to know?</div>
         </div>
       </div>
-      <div class="demo-suggestions">
+      <div class="demo-suggestions" id="demoSuggestions">
         <button class="demo-sug" onclick="sendSuggestion(this)">What tracks do you offer?</button>
         <button class="demo-sug" onclick="sendSuggestion(this)">How much does it cost?</button>
         <button class="demo-sug" onclick="sendSuggestion(this)">Is it safe for my child?</button>
         <button class="demo-sug" onclick="sendSuggestion(this)">How do I book a free trial?</button>
+        <button class="demo-sug" onclick="sendSuggestion(this)">What will my child learn?</button>
+        <button class="demo-sug" onclick="sendSuggestion(this)">Tell me about certificates</button>
       </div>
       <div class="demo-input-row">
-        <input type="text" class="demo-input" id="demoInput" placeholder="Ask about InfiniMind..." maxlength="300">
-        <button class="demo-send" id="demoSend" onclick="sendDemoMsg()">➤</button>
+        <input type="text" class="demo-input" id="demoInput" placeholder="Ask anything about InfiniMind..." maxlength="400">
+        <button class="demo-send" id="demoSend" onclick="sendDemoMsg()" aria-label="Send">➤</button>
       </div>
-      <div class="demo-disclaimer">Powered by AI · For enrollment, call <a href="tel:+923053687680" style="color:var(--accent)">0305 3687680</a> or <a href="https://wa.me/923053687680" target="_blank" style="color:var(--accent)">WhatsApp us</a></div>
+      <!-- Send conversation panel — appears after first exchange -->
+      <div class="chat-send-panel" id="chatSendPanel">
+        <div class="chat-send-title">📨 Continue this conversation with our team</div>
+        <div class="chat-send-btns">
+          <button class="chat-send-btn chat-send-wa" onclick="sendConvoToWhatsApp()">
+            💬 Send to WhatsApp
+          </button>
+          <button class="chat-send-btn chat-send-email" onclick="openEmailModal()">
+            ✉️ Send via Email
+          </button>
+        </div>
+        <div class="chat-send-note">Your questions + our answers are pre-filled — just press Send.</div>
+      </div>
+      <div class="demo-disclaimer">Powered by AI · Call us: <a href="tel:+923053687680" style="color:var(--accent)">0305 3687680</a> · <a href="https://wa.me/923053687680" target="_blank" style="color:var(--accent)">WhatsApp</a></div>
     </div>
   </div>
 </section>
+
+<!-- Email modal -->
+<div class="email-modal-bg" id="emailModalBg" onclick="closeEmailModal(event)">
+  <div class="email-modal">
+    <h3>✉️ Send your questions by email</h3>
+    <p>Your conversation has been pre-filled below. Copy it and paste it into your email app, or click <strong>Open in Email</strong> to open your email client automatically.</p>
+    <textarea id="emailBody" readonly></textarea>
+    <div class="email-modal-btns">
+      <a id="emailMailtoLink" href="#" class="chat-send-btn chat-send-wa" style="text-decoration:none;" target="_blank">📧 Open in Email App</a>
+      <button class="chat-send-btn chat-send-email" onclick="copyEmailBody()">📋 Copy Text</button>
+      <button class="chat-send-btn" style="background:var(--surface);border:1px solid var(--line);color:var(--ink-2);" onclick="closeEmailModal()">Close</button>
+    </div>
+    <div class="email-copy-note" id="emailCopyNote"></div>
+  </div>
+</div>
 
 <!-- ===== SAFETY ===== -->
 <section id="safety">
@@ -1202,11 +1414,11 @@ select.form-input{appearance:none;cursor:pointer;}
             </div>
             <div class="contact-item">
               <div class="contact-icon">✉️</div>
-              <a href="mailto:info@infinimindacademy.com">infinimind.academy@gmail.com</a>
+              <a href="mailto:infinimind.academy@gmail.com">infinimind.academy@gmail.com</a>
             </div>
             <div class="contact-item">
               <div class="contact-icon">💬</div>
-              <a href="https://wa.me/923053687680" target="_blank" rel="noopener">WhatsApp us directly (923053687680)</a>
+              <a href="https://wa.me/923053687680" target="_blank" rel="noopener">WhatsApp us directly</a>
             </div>
             <div class="contact-item">
               <div class="contact-icon">🌐</div>
@@ -1291,7 +1503,7 @@ select.form-input{appearance:none;cursor:pointer;}
         </a>
         <p>A premium online AI tech academy for children in grades 1–7. Teaching AI literacy through small groups, expert mentors, and real projects.</p>
         <div class="footer-social">
-          <a class="social-link" href="https://www.instagram.com/infinimind.academy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+          <a class="social-link" href="https://www.instagram.com/infinimind.academy" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
           <a class="social-link" href="#" aria-label="X/Twitter">𝕏</a>
           <a class="social-link" href="#" aria-label="YouTube">▶️</a>
           <a class="social-link" href="https://wa.me/923053687680" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
@@ -1320,7 +1532,7 @@ select.form-input{appearance:none;cursor:pointer;}
         <ul>
           <li><a href="#contact">Book a Trial Class</a></li>
           <li><a href="tel:+923053687680">0305 3687680</a></li>
-          <li><a href="mailto:info@infinimindacademy.com">infinimind.academy@gmail.com</a></li>
+          <li><a href="mailto:infinimind.academy@gmail.com">infinimind.academy@gmail.com</a></li>
           <li><a href="https://wa.me/923053687680" target="_blank">WhatsApp</a></li>
         </ul>
       </div>
@@ -1412,17 +1624,7 @@ const cntObs=new IntersectionObserver(entries=>{
 },{threshold:0.5});
 document.querySelectorAll('.count-num[data-target]').forEach(el=>cntObs.observe(el));
 
-/* ===== TILT ===== */
-if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
-  document.querySelectorAll('.why-card,.prog-card,.price-card,.testimonial-card,.curriculum-item,.cert-card').forEach(card=>{
-    card.addEventListener('mousemove',e=>{
-      const r=card.getBoundingClientRect();
-      const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-      card.style.transform=`perspective(700px) rotateX(${-y*5}deg) rotateY(${x*5}deg) translateZ(8px) translateY(-5px)`;
-    });
-    card.addEventListener('mouseleave',()=>{card.style.transform='';});
-  });
-}
+/* ===== TILT (handled by enhanced block below) ===== */
 
 /* ===== WHATSAPP FORM SUBMIT ===== */
 function submitToWhatsApp(){
@@ -1442,44 +1644,342 @@ function submitToWhatsApp(){
 }
 
 /* ===== AI ACADEMY CHATBOT ===== */
-const ACADEMY_SYSTEM = `You are the InfiniMind Academy assistant on the official website. You help parents and students understand InfiniMind Academy. Be warm, helpful, clear, and concise. Always answer in 2-4 short sentences max unless a longer answer is genuinely needed. Never make up information — only use what you know about InfiniMind from the context below.
+/* ═══════════════════════════════════════════════════════
+   INFINIMIND LOCAL CHATBOT
 
-ABOUT INFINIMIND ACADEMY:
-- Premium online AI tech academy for children in grades 1–7, based in Pakistan, serving all of Pakistan
-- Phone: 0305 3687680 | WhatsApp: https://wa.me/923053687680 | Email: info@infinimindacademy.com
-- Instagram: @infinimindacademy
+═══════════════════════════════════════
+ABOUT INFINIMIND ACADEMY
+═══════════════════════════════════════
+InfiniMind Academy is a premium online AI technology academy for children in Grades 1–7, based in Pakistan and serving students across all of Pakistan and internationally.
 
-THREE LEARNING TRACKS:
-1. Explorers (Grades 1–3, 10 chapters, PKR 4,100/month): AI basics, spotting AI in daily life, chatbots, privacy, fairness, capstone project. Reading book: AI Tales.
-2. Builders (Grades 4–5, 9 chapters, PKR 4,400/month): AI agents, how websites work, HTML, CSS, JavaScript intro, prompt engineering, AI at school. Reading book: AI Chronicles.
-3. Innovators (Grades 6–7, 12 chapters, PKR 4,900/month): HTML/CSS in-depth, JavaScript, Bootstrap, Python intro, how AI models are trained, machine learning basics, AI ethics, GitHub, portfolio, freelancing (Fiverr/Upwork). Reading book: AI Frontiers.
+CONTACT:
+- Phone / WhatsApp: 0305 3687680 (also: +923053687680 for international)
+- Email: infinimind.academy@gmail.com
+- Instagram: @infinimind.academy (https://www.instagram.com/infinimind.academy)
+- WhatsApp link: https://wa.me/923053687680
+- Response time: Within a few hours on WhatsApp; within 24 hours by email
 
-FORMAT: 30-minute weekly live sessions, groups of 6–8 students matched by grade.
+FOUNDING MISSION:
+To give every child in Grades 1–7 the clearest possible advantage in an AI-powered world — through structured, age-matched, expert-led live classes that make AI literacy a real, measurable skill, not just an abstract idea.
 
-PRICING: Starts from PKR 4,100–4,900/month depending on track. Final pricing confirmed at inquiry. First class is always free. No long-term contracts — month-to-month, pause or cancel anytime.
+═══════════════════════════════════════
+THREE LEARNING TRACKS
+═══════════════════════════════════════
 
-SAFETY:
-- Always group sessions, never one-on-one between child and mentor
-- All mentors background-checked and trained for young learners
-- Open-door policy: parents can sit in anytime, no notice needed
-- Minimal data collection: only name, grade, parent contact
-- No advertising profiles built on children
+1. EXPLORERS TRACK
+- Grades: 1–3
+- Duration: 10 chapters + capstone project
+- Price: Starting from PKR 4,100/month (final price confirmed at inquiry)
+- Reading Book: "AI Tales"
+- Focus: Understanding what AI is, spotting AI in everyday life, digital awareness, safe chatbot interactions, privacy, fairness in AI
+- Chapters: What is AI? | AI Around You | Human vs AI Thinking | Robots vs AI | Talking to Chatbots Safely | When AI Gets It Wrong | AI in Stories & Art | Privacy & AI | AI and Fairness | Capstone Project
+- Style: Story-based, play-based, no keyboard skills required, mentor guides everything
+- Group size: Max 6–8 students matched by age
 
-CERTIFICATES:
-- Track Completion Certificate: requires 80%+ attendance, all workbook activities completed, capstone project done, presented at monthly showcase, 70%+ knowledge check score
-- High Distinction Certificate: all above + 90%+ knowledge check + mentor commendation
-- Certificates are digital + printable PDF, signed by Head of Curriculum
+2. BUILDERS TRACK ⭐ Most Popular
+- Grades: 4–5
+- Duration: 9 chapters + capstone project
+- Price: Starting from PKR 4,400/month (final price confirmed at inquiry)
+- Reading Book: "AI Chronicles"
+- Focus: How AI actually works, building first websites, prompt engineering, using AI tools responsibly at school and home
+- Chapters: AI Agents & How They Think | What a Website Actually Is | HTML Basics | CSS Basics | What JavaScript Does | Frontend vs Backend | Prompt Engineering | AI at School | Capstone Project (build a working mini-site)
+- Style: Hands-on, students build real mini websites during class
+- Group size: Max 6–8 students matched by grade
 
-MATERIALS: Every student gets a workbook and a track-specific reading book.
+3. INNOVATORS TRACK
+- Grades: 6–7
+- Duration: 12 chapters + capstone project
+- Price: Starting from PKR 4,900/month (final price confirmed at inquiry)
+- Reading Book: "AI Frontiers"
+- Focus: Real programming, machine learning, AI ethics, GitHub, building a portfolio, intro to freelancing
+- Chapters: Coding Agents & Limits | HTML & CSS In-Depth | JavaScript Fundamentals | Bootstrap CSS Framework | Frontend vs Backend & Debugging | Intro to Python | How AI Models Are Trained | Machine Learning Basics | AI Ethics & Society | GitHub & Version Control | Building a Portfolio | Freelancing 101 (Fiverr & Upwork)
+- Style: Real coding environment, students write actual Python, build GitHub portfolios
+- Group size: Max 6–8 students matched by grade
 
-MONTHLY SHOWCASE: Children present a real project to parents each month.
+═══════════════════════════════════════
+PRICING & ENROLLMENT
+═══════════════════════════════════════
+- Explorers: Starting from PKR 4,100/month
+- Builders: Starting from PKR 4,400/month
+- Innovators: Starting from PKR 4,900/month
+- All pricing is starting-from; final pricing confirmed at inquiry — no hidden fees
+- FIRST CLASS IS ALWAYS FREE — no card required, no commitment
+- No long-term contracts — fully month-to-month
+- Pause or cancel anytime with no penalties
+- How to enroll: Fill the form on the website, WhatsApp 0305 3687680, or call
+- What's included: Live sessions + Student Workbook + Track Reading Book (shipped to your door)
 
-HOW TO ENROLL: Book a free trial via the form on the website, WhatsApp 0305 3687680, or call. Free first class with no card required.
+═══════════════════════════════════════
+SESSION FORMAT
+═══════════════════════════════════════
+- Format: 100% live online sessions (never pre-recorded)
+- Session length: 30 minutes per week — calibrated for a child's attention span
+- Group size: 6–8 students maximum, matched by grade and age
+- Frequency: Weekly
+- Platform: Online video call (link shared upon enrollment)
+- Device needed: Laptop, tablet, or desktop with camera and microphone. Stable internet required. Mobile phones not recommended for best experience.
 
-If asked something outside this scope, say you don't have that info and suggest they contact us directly via WhatsApp.`;
+═══════════════════════════════════════
+SAFETY STANDARDS
+═══════════════════════════════════════
+- ALWAYS group sessions — a child is NEVER alone with a mentor one-on-one
+- All mentors are background-checked before their first class
+- All mentors undergo child safety training specifically for young learners
+- Open-door policy: parents can sit in on ANY class, ANY time, with ZERO advance notice required — just join with your child's link
+- Minimal data collection: only name, grade, and parent contact. No advertising profiles. No data sold.
+- Monthly showcase: children present real projects to parents, so parents always know what's being learned
+- Session recaps sent to parents after every class
+
+═══════════════════════════════════════
+CERTIFICATES
+═══════════════════════════════════════
+TRACK COMPLETION CERTIFICATE (standard):
+- Attend 80%+ of live sessions
+- Complete all chapter workbook activities
+- Finish the track's capstone project
+- Present the project at a monthly showcase
+- Pass the end-of-track knowledge check (70%+ score)
+- Certificate is digital + printable PDF, signed by Head of Curriculum
+- Can be included in school portfolios or future resumes
+
+HIGH DISTINCTION AWARD (for exceptional students):
+- All completion certificate criteria met, PLUS:
+- Knowledge check score of 90% or above
+- Mentor commendation on capstone quality and presentation
+
+═══════════════════════════════════════
+MATERIALS
+═══════════════════════════════════════
+Every enrolled student receives:
+1. Student Workbook — chapter-by-chapter activities for their track
+2. Track Reading Book — shipped to your door:
+   - Explorers: "AI Tales"
+   - Builders: "AI Chronicles"
+   - Innovators: "AI Frontiers"
+
+═══════════════════════════════════════
+MONTHLY SHOWCASE
+═══════════════════════════════════════
+- Every month, students present one real project to their parents live
+- This is proof of actual learning — not a quiz or a grade
+- Parents are always invited and encouraged to attend
+- Showcase attendance is part of the certificate requirements
+
+═══════════════════════════════════════
+WHICH TRACK IS RIGHT FOR MY CHILD?
+═══════════════════════════════════════
+- Grade 1, 2, or 3 → Explorers
+- Grade 4 or 5 → Builders
+- Grade 6 or 7 → Innovators
+- If unsure, parents can WhatsApp us and we'll recommend the right track based on the child's grade and confidence level — no pressure
+
+═══════════════════════════════════════
+FAQ — COMMON PARENT QUESTIONS
+═══════════════════════════════════════
+Q: Does my child need coding or tech experience?
+A: No. Explorers requires zero tech skills. All tracks start from the right starting point for the age group.
+
+Q: Are sessions recorded?
+A: No. All sessions are live. Sessions are not recorded for replay (child safety reasons). Mentors send a recap after each session.
+
+Q: What if my child misses a class?
+A: The mentor provides a catch-up summary and workbook guidance. Makeup sessions can be arranged with advance notice.
+
+Q: Can parents sit in?
+A: Yes, always. Any time, without any advance notice. Your child's class link is your link too.
+
+Q: What device is needed?
+A: Laptop, tablet, or desktop with camera and mic. Stable internet required. Phones are not recommended.
+
+Q: Is there a contract?
+A: No contracts. Month-to-month only. Pause or cancel anytime.
+
+Q: How long is each class?
+A: 30 minutes per week.
+
+Q: How many children per group?
+A: Maximum 6–8, matched by age and grade.
+
+Q: What countries do you serve?
+A: All of Pakistan, and international students can join too (sessions are online).
+
+Q: How quickly will I hear back after inquiry?
+A: Within a few hours on WhatsApp. Within 24 hours by email.
+
+═══════════════════════════════════════
+WHAT TO SAY IF YOU DON'T KNOW
+═══════════════════════════════════════
+If a question falls outside this information, say something like: "That's a great question — I don't have that specific detail on hand. I'd recommend sending it directly to our team on WhatsApp (0305 3687680) or by email at infinimind.academy@gmail.com — they'll get back to you within a few hours."`;
+
+/* ═══════════════════════════════════════════════════════
+   INFINIMIND LOCAL CHATBOT — No API needed, works offline
+   Smart keyword + intent matching, multi-turn context
+═══════════════════════════════════════════════════════ */
+
+const KB = {
+  tracks: {
+    reply: `We have three age-matched tracks:\n\n🔭 *Explorers* (Grades 1–3) — AI basics, spotting AI in daily life, chatbots, privacy & fairness. 10 chapters. Starts from PKR 4,100/month.\n\n🛠️ *Builders* (Grades 4–5) — How AI works, HTML/CSS web building, prompt engineering, AI tools at school. 9 chapters. Starts from PKR 4,400/month.\n\n🚀 *Innovators* (Grades 6–7) — Python coding, machine learning, AI ethics, GitHub portfolio, freelancing (Fiverr/Upwork). 12 chapters. Starts from PKR 4,900/month.\n\nEvery track includes a Student Workbook + Reading Book shipped to your door, and live weekly sessions. Want details on a specific track?`,
+    keywords: ['track','tracks','program','programs','course','courses','levels','level','option','what do you offer','what you offer','what you teach']
+  },
+  explorers: {
+    reply: `🔭 *Explorers Track* is perfect for Grades 1–3!\n\nChildren learn what AI is, how to spot it in everyday life, how to talk to chatbots safely, why AI makes mistakes, privacy, fairness, and AI in stories & art. It's 10 chapters + a capstone project.\n\nNo keyboard skills needed at all — the mentor guides everything through stories, play, and activities. Reading book: "AI Tales" (shipped to your door).\n\n💰 Starting from PKR 4,100/month · First class always free!`,
+    keywords: ['explorer','explorers','grade 1','grade 2','grade 3','gr 1','gr 2','gr 3','g1','g2','g3','youngest','young children','small kids']
+  },
+  builders: {
+    reply: `🛠️ *Builders Track* is for Grades 4–5 — and it's our most popular track!\n\nStudents learn how AI actually works, how websites are built (HTML, CSS, JavaScript basics), prompt engineering, and how to use AI tools responsibly at school. By the end, they build and demo a real mini-website!\n\nIt's 9 chapters + a capstone project. Reading book: "AI Chronicles" (shipped to you).\n\n💰 Starting from PKR 4,400/month · First class always free!`,
+    keywords: ['builder','builders','grade 4','grade 5','gr 4','gr 5','g4','g5','html','css','javascript','web','website','prompt']
+  },
+  innovators: {
+    reply: `🚀 *Innovators Track* is for Grades 6–7 — our most advanced track!\n\nStudents learn real Python programming, how AI models are trained, machine learning basics, AI ethics, GitHub, how to build a portfolio, and even intro to freelancing on Fiverr & Upwork. They write actual code and train mini models!\n\n12 chapters + a full capstone project. Reading book: "AI Frontiers" (shipped to you).\n\n💰 Starting from PKR 4,900/month · First class always free!`,
+    keywords: ['innovator','innovators','grade 6','grade 7','gr 6','gr 7','g6','g7','python','machine learning','github','portfolio','fiverr','upwork','freelanc','coding','code','older']
+  },
+  pricing: {
+    reply: `💰 *Pricing at InfiniMind Academy:*\n\n🔭 Explorers (Gr 1–3): Starting from PKR 4,100/month\n🛠️ Builders (Gr 4–5): Starting from PKR 4,400/month\n🚀 Innovators (Gr 6–7): Starting from PKR 4,900/month\n\nAll prices are starting-from — final pricing is confirmed when you inquire (no hidden fees).\n\nEvery track includes your workbook, reading book (shipped to your door), and all live sessions.\n\n✅ First class is ALWAYS FREE — no card required!\n✅ No long-term contract — month-to-month only\n✅ Pause or cancel anytime, no penalties`,
+    keywords: ['price','pricing','cost','fee','fees','pkr','rupee','how much','expensive','afford','monthly','pay','payment','charge']
+  },
+  free_trial: {
+    reply: `🎉 Yes! Your child's *first class is completely free* — no card required, no commitment, no pressure!\n\nHere's how to book:\n1️⃣ Fill the enrollment form on this page (scroll down to "Book Your Free Trial Class")\n2️⃣ Or WhatsApp us directly: *0305 3687680*\n3️⃣ Or call us on the same number\n\nWe'll confirm a time that works for you and your child within a few hours. After the free class, if it's the right fit, enrollment takes about 5 minutes!`,
+    keywords: ['free','trial','book','enroll','enrolment','enrollment','register','sign up','signup','start','join','begin','first class','demo class']
+  },
+  safety: {
+    reply: `🛡️ *Child Safety at InfiniMind — here's exactly what we do:*\n\n👥 Always group sessions — your child is NEVER alone with a mentor one-on-one\n🔍 Every mentor is background-checked before their very first class\n🏫 All mentors complete child safety training for young learners\n👁️ Open-door policy — parents can sit in on ANY class, ANY time, zero notice needed. Just use your child's link.\n🔒 Minimal data: we only collect name, grade & parent contact. No advertising. No data sold.\n📋 Session recaps sent to parents after every class\n\nSafety isn't an afterthought at InfiniMind — it's built into the product itself.`,
+    keywords: ['safe','safety','secure','security','protect','protection','mentor','background','alone','one on one','1 on 1','parent','sit in','watch','monitor','data','privacy','predator','trust','worry','concern']
+  },
+  sessions: {
+    reply: `📅 *How sessions work at InfiniMind:*\n\n🔴 100% live — never pre-recorded\n⏱️ 30 minutes per week (calibrated for a child's attention span)\n👥 Groups of 6–8 students max, matched by age and grade\n💻 Online via video call — link shared when you enroll\n📱 Device needed: laptop, tablet, or desktop with camera & mic. Stable internet required. Phones not recommended.\n\nParents are always welcome to join — just use your child's class link, anytime, no notice needed!`,
+    keywords: ['session','class','classes','schedule','timing','time','duration','long','minutes','weekly','week','live','online','video','call','device','laptop','tablet','phone','internet']
+  },
+  certificate: {
+    reply: `🏅 *InfiniMind Certificates — earned, not given:*\n\n*Track Completion Certificate* (standard):\n✓ Attend 80%+ of live sessions\n✓ Complete all workbook chapter activities\n✓ Finish the capstone project\n✓ Present at a monthly showcase\n✓ Pass end-of-track knowledge check (70%+)\n\n⭐ *High Distinction Award* (exceptional students):\nSame as above, PLUS 90%+ on knowledge check + mentor commendation\n\nCertificates are digital + printable PDF, signed by our Head of Curriculum. Students can include them in school portfolios or future resumes!`,
+    keywords: ['certificate','cert','certif','award','diploma','qualify','qualification','completion','distinction','grade','score','pass']
+  },
+  materials: {
+    reply: `📦 *What your child receives with enrollment:*\n\n📒 Student Workbook — chapter-by-chapter activities for their specific track\n📚 Track Reading Book — shipped to your door:\n   🔭 Explorers → "AI Tales"\n   🛠️ Builders → "AI Chronicles"\n   🚀 Innovators → "AI Frontiers"\n\nBoth the workbook and reading book are included in the monthly fee — no extra cost!`,
+    keywords: ['material','materials','book','books','workbook','reading','physical','shipped','ship','receive','get','include','included']
+  },
+  showcase: {
+    reply: `🎤 *Monthly Showcase:*\n\nEvery month, students present a real project they built to their parents — live!\n\nThis isn't a quiz or a grade. It's actual proof of what your child learned and made. Parents are always invited and encouraged to attend.\n\nShowcase attendance is also part of the Certificate requirements, so students stay motivated and prepared throughout the term.`,
+    keywords: ['showcase','project','present','demo','capstone','monthly','display','show','exhibit']
+  },
+  which_track: {
+    reply: `Choosing the right track is simple — it's based on your child's grade:\n\n🔭 *Explorers* → Grades 1, 2, or 3\n🛠️ *Builders* → Grades 4 or 5\n🚀 *Innovators* → Grades 6 or 7\n\nNot sure which fits best? WhatsApp us at *0305 3687680* and we'll help you pick the right one based on your child's grade and confidence level — no pressure at all! 😊`,
+    keywords: ['which track','which program','which course','right for','right track','suitable','recommend','grade is','child is in','my child']
+  },
+  contact: {
+    reply: `📞 *Reach InfiniMind Academy:*\n\n💬 WhatsApp / Phone: *0305 3687680*\n✉️ Email: infinimind.academy@gmail.com\n📷 Instagram: @infinimind.academy\n\nWe typically respond within a few hours on WhatsApp, and within 24 hours by email. You can also use the contact form at the bottom of this page!\n\nFor quickest response — WhatsApp is the way to go 😊`,
+    keywords: ['contact','reach','phone','number','whatsapp','email','instagram','social','call','message','dm','speak','talk to','get in touch']
+  },
+  no_contract: {
+    reply: `✅ No contracts at InfiniMind — ever!\n\nAll plans are fully month-to-month. You can:\n⏸️ Pause anytime\n❌ Cancel anytime\n🔄 Switch tracks (ask us first)\n\nNo penalties, no fees, no drama. We believe the academy should earn your continued enrollment every month — not a signature on a contract. 😊`,
+    keywords: ['contract','lock','locked','commitment','cancel','cancell','pause','stop','quit','leave','exit','month to month','flexible','flexibility']
+  },
+  miss_class: {
+    reply: `No worries if your child misses a class! 😊\n\nHere's what happens:\n📋 The mentor sends a catch-up summary of what was covered\n📒 Workbook activities can be done at home for that chapter\n🔄 Makeup sessions can be arranged with advance notice\n\n(Note: Sessions aren't recorded for replay — this is a child safety policy. But the recap + workbook keeps your child on track!)`,
+    keywords: ['miss','missed','absent','absence','skip','makeup','make up','catch up','catchup','can\'t attend','cannot attend','recording','record','replay','watch later']
+  },
+  no_experience: {
+    reply: `Absolutely no experience needed! 🙌\n\n*Explorers* (Gr 1–3) doesn't even require independent typing or keyboard skills — the mentor guides everything through the screen, and children participate by talking and pointing.\n\n*Builders* and *Innovators* also start from scratch for their age level — no prior coding or tech knowledge assumed.\n\nWe always start from the right starting point for each age group. That's the whole point of having three separate tracks!`,
+    keywords: ['experience','beginner','no experience','never','before','first time','know nothing','zero','background','skill','skills','prior','prerequisite','require']
+  },
+  pakistan: {
+    reply: `InfiniMind Academy is based in Pakistan 🇵🇰 and we serve students across the entire country — Karachi, Lahore, Islamabad, and everywhere else!\n\nWe're fully online, so location doesn't matter at all. International students (UAE, UK, US, etc.) are also welcome to join — sessions run via video call, so it works anywhere with a good internet connection.\n\nWhatsApp us at *0305 3687680* to confirm timing and availability for your city!`,
+    keywords: ['pakistan','karachi','lahore','islamabad','peshawar','where','location','city','country','international','abroad','uk','uae','usa','america']
+  },
+  hello: {
+    reply: `Hi there! 👋 Welcome to InfiniMind Academy!\n\nI'm the InfiniMind assistant and I know everything about our programs, pricing, safety, curriculum, and how to enroll. What would you like to know?\n\nYou can ask me about:\n• Our 3 learning tracks (Explorers, Builders, Innovators)\n• Pricing and free trial\n• Safety and parental visibility\n• Certificates and materials\n• How to book a class`,
+    keywords: ['hi','hello','hey','hiya','assalam','salam','greetings','good morning','good evening','good afternoon','sup','yo']
+  },
+  thanks: {
+    reply: `You're very welcome! 😊 If you have any more questions, just ask — I'm here all day!\n\nWhen you're ready, you can:\n📋 Fill the enrollment form on this page\n💬 WhatsApp us: *0305 3687680*\n✉️ Email: infinimind.academy@gmail.com\n\nWe'd love to have your child join us!`,
+    keywords: ['thank','thanks','thankyou','thank you','great','awesome','perfect','helpful','understood','got it','makes sense']
+  }
+};
+
+function matchIntent(input) {
+  const q = input.toLowerCase().trim();
+  // Score each KB entry
+  let best = null, bestScore = 0;
+  for (const [key, entry] of Object.entries(KB)) {
+    let score = 0;
+    for (const kw of entry.keywords) {
+      if (q.includes(kw)) {
+        // Longer keyword = more specific = higher weight
+        score += kw.length > 6 ? 3 : kw.length > 3 ? 2 : 1;
+      }
+    }
+    if (score > bestScore) { bestScore = score; best = entry; }
+  }
+  if (best && bestScore > 0) return best.reply;
+
+  // Grade detection fallback
+  const gradeMatch = q.match(/grade\s*(\d)|class\s*(\d)|gr\.?\s*(\d)/i);
+  if (gradeMatch) {
+    const g = parseInt(gradeMatch[1]||gradeMatch[2]||gradeMatch[3]);
+    if (g >= 1 && g <= 3) return KB.explorers.reply;
+    if (g >= 4 && g <= 5) return KB.builders.reply;
+    if (g >= 6 && g <= 7) return KB.innovators.reply;
+  }
+
+  // Fallback
+  return `That's a great question! I might not have that specific detail, but our team definitely does. 😊\n\nThe fastest way to get an answer:\n💬 WhatsApp: *0305 3687680* (reply within a few hours)\n✉️ Email: infinimind.academy@gmail.com\n\nOr use the "Send to WhatsApp" button below to send your question straight to our team with one tap!`;
+}
 
 let chatHistory=[];
 let isThinking=false;
+let convoStarted=false;
+
+function buildConvoText(){
+  let lines=['InfiniMind Academy — Chat Conversation Summary','='.repeat(44),''];
+  chatHistory.forEach(m=>{
+    if(m.role==='user') lines.push('👤 Parent/Student: '+m.content,'');
+    else lines.push('🤖 InfiniMind Assistant: '+m.content,'');
+  });
+  lines.push('='.repeat(44));
+  lines.push('Please follow up on the above. Thank you!');
+  return lines.join('\n');
+}
+
+function showSendPanel(){
+  const panel=document.getElementById('chatSendPanel');
+  if(panel&&!panel.classList.contains('visible')) panel.classList.add('visible');
+}
+
+function sendConvoToWhatsApp(){
+  const convo=buildConvoText();
+  const intro='Hello InfiniMind Academy! 👋 I have some questions from your website chatbot:\n\n';
+  const encoded=encodeURIComponent(intro+convo);
+  window.open('https://wa.me/923053687680?text='+encoded,'_blank');
+}
+
+function openEmailModal(){
+  const convo=buildConvoText();
+  const body=`Hello InfiniMind Academy,\n\nI have been chatting with your website assistant and have the following questions:\n\n${convo}\n\nKindly reply at your earliest convenience.\n\nThank you!`;
+  document.getElementById('emailBody').value=body;
+  const subject=encodeURIComponent('Questions about InfiniMind Academy');
+  const bodyEncoded=encodeURIComponent(body);
+  document.getElementById('emailMailtoLink').href=`mailto:infinimind.academy@gmail.com?subject=${subject}&body=${bodyEncoded}`;
+  document.getElementById('emailCopyNote').textContent='';
+  document.getElementById('emailModalBg').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeEmailModal(e){
+  if(e&&e.target!==document.getElementById('emailModalBg')) return;
+  document.getElementById('emailModalBg').classList.remove('open');
+  document.body.style.overflow='';
+}
+window.addEventListener('keydown',e=>{if(e.key==='Escape') closeEmailModal();});
+
+function copyEmailBody(){
+  const ta=document.getElementById('emailBody');
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(()=>{
+    document.getElementById('emailCopyNote').textContent='✓ Copied! Paste into your email app.';
+  }).catch(()=>{
+    try{ document.execCommand('copy'); document.getElementById('emailCopyNote').textContent='✓ Copied!'; }
+    catch(e2){ document.getElementById('emailCopyNote').textContent='Select all text above and copy (Ctrl+C / Cmd+C)'; }
+  });
+}
 
 function addMsg(text,who){
   const c=document.getElementById('demoMessages');
@@ -1490,7 +1990,8 @@ function addMsg(text,who){
   av.textContent=who==='ai'?'∞':'👤';
   const b=document.createElement('div');
   b.className='demo-bubble';
-  b.textContent=text;
+  // Bold *text* and render newlines
+  b.innerHTML=text.replace(/\*([^*]+)\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
   d.appendChild(av);d.appendChild(b);
   c.appendChild(d);
   c.scrollTop=c.scrollHeight;
@@ -1510,41 +2011,322 @@ function showTyping(){
 }
 function hideTyping(){const e=document.getElementById('typingBubble');if(e)e.remove();}
 
-async function sendDemoMsg(){
+function sendDemoMsg(){
   if(isThinking)return;
   const input=document.getElementById('demoInput');
   const text=input.value.trim();
   if(!text)return;
   isThinking=true;
   input.value='';
+  const suggs=document.getElementById('demoSuggestions');
+  if(suggs) suggs.style.display='none';
   addMsg(text,'user');
   chatHistory.push({role:'user',content:text});
   showTyping();
-  try{
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6',
-        max_tokens:400,
-        system:ACADEMY_SYSTEM,
-        messages:chatHistory.slice(-10)
-      })
-    });
-    const data=await resp.json();
-    const reply=data.content?.[0]?.text||"Sorry, I'm having trouble connecting. Please WhatsApp us directly at 0305 3687680!";
+  // Simulate a natural thinking delay (400–900ms)
+  const delay=400+Math.floor(Math.random()*500);
+  setTimeout(()=>{
     hideTyping();
+    const reply=matchIntent(text);
     addMsg(reply,'ai');
     chatHistory.push({role:'assistant',content:reply});
-  }catch(e){
-    hideTyping();
-    addMsg("I'm having a connection issue right now. Please WhatsApp us at 0305 3687680 — we'll answer any questions immediately!",'ai');
-  }
-  isThinking=false;
+    if(!convoStarted){
+      convoStarted=true;
+      setTimeout(showSendPanel,600);
+    }
+    isThinking=false;
+  },delay);
 }
 
 document.getElementById('demoInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendDemoMsg();});
-function sendSuggestion(btn){document.getElementById('demoInput').value=btn.textContent;sendDemoMsg();}
+function sendSuggestion(btn){
+  document.getElementById('demoInput').value=btn.textContent;
+  sendDemoMsg();
+}
+
+function buildConvoText(){
+  // Build a readable summary of the full conversation
+  let lines=['InfiniMind Academy — Chat Conversation Summary','='.repeat(44),''];
+  chatHistory.forEach(m=>{
+    if(m.role==='user') lines.push('👤 Parent/Student: '+m.content,'');
+    else lines.push('🤖 InfiniMind Assistant: '+m.content,'');
+  });
+  lines.push('='.repeat(44));
+  lines.push('Please follow up on the above questions. Thank you!');
+  return lines.join('\n');
+}
+
+function showSendPanel(){
+  const panel=document.getElementById('chatSendPanel');
+  if(panel&&!panel.classList.contains('visible')) panel.classList.add('visible');
+}
+
+function sendConvoToWhatsApp(){
+  const convo=buildConvoText();
+  const intro='Hello InfiniMind Academy! 👋 I have some questions from your website chatbot:\n\n';
+  const full=intro+convo;
+  const encoded=encodeURIComponent(full);
+  // Try to open WhatsApp — works on mobile (native app) and desktop (web.whatsapp.com)
+  const waUrl='https://wa.me/923053687680?text='+encoded;
+  window.open(waUrl,'_blank');
+}
+
+function openEmailModal(){
+  const convo=buildConvoText();
+  const body=`Hello InfiniMind Academy,\n\nI have been chatting with your website assistant and have the following questions:\n\n${convo}\n\nKindly reply at your earliest convenience.\n\nThank you!`;
+  document.getElementById('emailBody').value=body;
+  const subject=encodeURIComponent('Questions about InfiniMind Academy');
+  const bodyEncoded=encodeURIComponent(body);
+  document.getElementById('emailMailtoLink').href=`mailto:infinimind.academy@gmail.com?subject=${subject}&body=${bodyEncoded}`;
+  document.getElementById('emailCopyNote').textContent='';
+  document.getElementById('emailModalBg').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeEmailModal(e){
+  if(e&&e.target!==document.getElementById('emailModalBg')&&e!==undefined&&e.currentTarget) return;
+  document.getElementById('emailModalBg').classList.remove('open');
+  document.body.style.overflow='';
+}
+// Also close on ESC
+window.addEventListener('keydown',e=>{ if(e.key==='Escape') closeEmailModal(); });
+
+function copyEmailBody(){
+  const ta=document.getElementById('emailBody');
+  ta.select();
+  try{
+    document.execCommand('copy');
+    document.getElementById('emailCopyNote').textContent='✓ Copied to clipboard! Paste it into your email app.';
+  }catch(err){
+    // Fallback for modern browsers
+    navigator.clipboard.writeText(ta.value).then(()=>{
+      document.getElementById('emailCopyNote').textContent='✓ Copied to clipboard!';
+    }).catch(()=>{
+      document.getElementById('emailCopyNote').textContent='Select the text above and copy manually (Ctrl+C / Cmd+C).';
+    });
+  }
+}
+
+function addMsg(text,who){
+  const c=document.getElementById('demoMessages');
+  const d=document.createElement('div');
+  d.className='demo-msg '+who;
+  const av=document.createElement('div');
+  av.className='demo-avatar '+(who==='ai'?'ai-av':'user-av');
+  av.textContent=who==='ai'?'∞':'👤';
+  const b=document.createElement('div');
+  b.className='demo-bubble';
+  // Render line breaks in AI responses
+  b.innerHTML=text.replace(/\n/g,'<br>');
+  d.appendChild(av);d.appendChild(b);
+  c.appendChild(d);
+  c.scrollTop=c.scrollHeight;
+}
+
+function showTyping(){
+  const c=document.getElementById('demoMessages');
+  const d=document.createElement('div');
+  d.className='demo-msg ai';d.id='typingBubble';
+  const av=document.createElement('div');
+  av.className='demo-avatar ai-av';av.textContent='∞';
+  const b=document.createElement('div');
+  b.className='demo-bubble';
+  b.innerHTML='<div class="demo-typing"><span></span><span></span><span></span></div>';
+  d.appendChild(av);d.appendChild(b);
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function hideTyping(){const e=document.getElementById('typingBubble');if(e)e.remove();}
+
+
+/* ===== SCROLL TO TOP ===== */
+const scrollTopBtn=document.getElementById('scrollTopBtn');
+window.addEventListener('scroll',()=>{
+  scrollTopBtn.classList.toggle('visible',window.scrollY>500);
+},{ passive:true });
+
+/* ===== SCROLL PROGRESS (add passive) ===== */
+window.addEventListener('scroll',()=>{
+  const pct=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  document.getElementById('scrollProgress').style.width=pct+'%';
+},{ passive:true });
+
+/* ===== ACTIVE NAV LINK ON SCROLL ===== */
+(function(){
+  const sections=[...document.querySelectorAll('section[id],div[id]')].filter(s=>s.id);
+  const links=document.querySelectorAll('.nav-links a');
+  function onScroll(){
+    let cur='';
+    sections.forEach(s=>{
+      if(window.scrollY>=s.offsetTop-110) cur=s.id;
+    });
+    links.forEach(l=>{
+      l.classList.toggle('nav-active',l.getAttribute('href')==='#'+cur);
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+
+/* ===== STAGGER REVEAL ===== */
+(function(){
+  const staggerObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('revealed');
+        staggerObs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('[data-stagger]').forEach(el=>staggerObs.observe(el));
+})();
+
+/* ===== LEFT/RIGHT REVEAL ===== */
+(function(){
+  const lrObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('revealed');
+        lrObs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('[data-reveal-left],[data-reveal-right]').forEach(el=>lrObs.observe(el));
+})();
+
+/* ===== BUTTON RIPPLE EFFECT ===== */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('pointerdown',e=>{
+    const r=btn.getBoundingClientRect();
+    const size=Math.max(r.width,r.height)*2;
+    const span=document.createElement('span');
+    span.className='ripple';
+    span.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px;`;
+    btn.appendChild(span);
+    span.addEventListener('animationend',()=>span.remove());
+  });
+});
+
+/* ===== TOUCH SWIPE for TESTIMONIALS ===== */
+(function(){
+  const grids=document.querySelectorAll('.testimonials-grid,.programs-grid');
+  grids.forEach(grid=>{
+    let startX=0,isDragging=false,startScroll=0;
+    grid.addEventListener('touchstart',e=>{
+      startX=e.touches[0].clientX;
+      startScroll=grid.scrollLeft;
+      isDragging=true;
+    },{passive:true});
+    grid.addEventListener('touchmove',e=>{
+      if(!isDragging)return;
+      const dx=startX-e.touches[0].clientX;
+      grid.scrollLeft=startScroll+dx;
+    },{passive:true});
+    grid.addEventListener('touchend',()=>{isDragging=false;});
+  });
+})();
+
+/* ===== MOUSE DRAG SCROLL for HORIZONTAL GRIDS ===== */
+(function(){
+  const grids=document.querySelectorAll('.testimonials-grid,.programs-grid');
+  grids.forEach(grid=>{
+    let isDown=false,startX=0,scrollLeft=0;
+    grid.addEventListener('mousedown',e=>{
+      isDown=true;grid.style.cursor='grabbing';
+      startX=e.pageX-grid.offsetLeft;scrollLeft=grid.scrollLeft;
+    });
+    document.addEventListener('mouseup',()=>{isDown=false;grid.style.cursor='';});
+    grid.addEventListener('mousemove',e=>{
+      if(!isDown)return;
+      e.preventDefault();
+      const x=e.pageX-grid.offsetLeft;
+      grid.scrollLeft=scrollLeft-(x-startX)*1.2;
+    });
+  });
+})();
+
+/* ===== TAB SWIPE (touch) ===== */
+(function(){
+  const panels=document.querySelector('.curriculum');
+  if(!panels)return;
+  let touchStartX=0;
+  const tabs=['explorers','builders','innovators'];
+  panels.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
+  panels.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-touchStartX;
+    if(Math.abs(dx)<60)return;
+    const activePanelEl=document.querySelector('.tab-panel.active');
+    const activeTabBtn=document.querySelector('.tab-btn.active');
+    if(!activePanelEl||!activeTabBtn)return;
+    const idx=tabs.findIndex(t=>activePanelEl.id==='tab-'+t);
+    const next=dx<0?Math.min(idx+1,2):Math.max(idx-1,0);
+    if(next===idx)return;
+    const nextBtn=document.querySelectorAll('.tab-btn')[next];
+    if(nextBtn) switchTab(tabs[next],nextBtn);
+  },{passive:true});
+})();
+
+/* ===== SMOOTH SECTION LABEL UNDERLINE ===== */
+(function(){
+  document.querySelectorAll('h2.section-title').forEach(el=>{
+    const span=document.createElement('span');
+    span.className='section-title-line';
+    // Wrap only text node children
+    el.childNodes.forEach(n=>{if(n.nodeType===3&&n.textContent.trim()){const s=document.createElement('span');s.textContent=n.textContent;n.replaceWith(s);}});
+  });
+  const lineObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('revealed');
+        lineObs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.3});
+  document.querySelectorAll('.section-title-line').forEach(el=>lineObs.observe(el));
+})();
+
+/* ===== PARALLAX GLOW on HERO (mouse move) ===== */
+(function(){
+  const hero=document.querySelector('.hero');
+  if(!hero||window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const g1=hero.querySelector('.hero-glow-1');
+  const g2=hero.querySelector('.hero-glow-2');
+  const g3=hero.querySelector('.hero-glow-3');
+  hero.addEventListener('mousemove',e=>{
+    const {width,height,left,top}=hero.getBoundingClientRect();
+    const x=(e.clientX-left)/width-.5;
+    const y=(e.clientY-top)/height-.5;
+    if(g1)g1.style.transform=`translate(${x*30}px,${y*30}px)`;
+    if(g2)g2.style.transform=`translate(${-x*20}px,${-y*20}px)`;
+    if(g3)g3.style.transform=`translate(${x*15}px,${y*15}px)`;
+  },{passive:true});
+  hero.addEventListener('mouseleave',()=>{
+    if(g1)g1.style.transform='';
+    if(g2)g2.style.transform='';
+    if(g3)g3.style.transform='';
+  });
+})();
+
+/* ===== CARD TILT (enhanced with touch) ===== */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const cards=document.querySelectorAll('.why-card,.prog-card,.price-card,.testimonial-card,.cert-card,.curriculum-item');
+  function applyTilt(card,x,y){
+    const r=card.getBoundingClientRect();
+    const px=(x-r.left)/r.width-.5;
+    const py=(y-r.top)/r.height-.5;
+    card.style.transform=`perspective(700px) rotateX(${-py*6}deg) rotateY(${px*6}deg) translateZ(8px) translateY(-5px)`;
+  }
+  cards.forEach(card=>{
+    card.addEventListener('mousemove',e=>applyTilt(card,e.clientX,e.clientY));
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+    // Touch tilt (subtle)
+    card.addEventListener('touchmove',e=>{
+      const t=e.touches[0];
+      applyTilt(card,t.clientX,t.clientY);
+    },{passive:true});
+    card.addEventListener('touchend',()=>{card.style.transform='';});
+  });
+})();
 </script>
 </body>
 </html>
